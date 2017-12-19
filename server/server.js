@@ -1,3 +1,5 @@
+import { log } from 'util';
+
 
 const express = require('express');
 const server = express();
@@ -8,7 +10,7 @@ const mongoose = require('mongoose');
 const env = require("./env/development.env");
 
 
-
+console.log('bla');
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json());
 
