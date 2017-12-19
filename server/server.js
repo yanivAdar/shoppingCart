@@ -1,16 +1,25 @@
+
 const express = require('express');
 const server = express();
+const bodyParser = require('body-parser');
+const async = require('async');
+const mongoose = require('mongoose');
 
-// server.use('')
+const env = require("./env/development.env");
+// const 
 
-server.get('/test', (req,res)=>{
-    res.send('ok');
-})
 
-server.listen(4400, err => {
-    if(err){
-        console.log(err);    
+server.use(bodyParser.urlencoded({ extended: false }))
+server.use(bodyParser.json());
+
+
+
+async.waterfall([
+    callback => mongoose.connect(process.env.CONNECTION_STRING, { useMongoClient: true }, err => callback(err)),
+    callback => server.listen(process.env.PORT, err => callback(err))
+], (err, results) => {
+    if (err) {
+        return console.log(err);
     }
-    console.log('server connected!');
-    
-})
+    return console.log(`Server up and running on port ${process.env.PORT} and connected to mongo DB`);
+});
