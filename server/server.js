@@ -1,6 +1,3 @@
-import { log } from 'util';
-
-
 const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
@@ -9,10 +6,14 @@ const mongoose = require('mongoose');
 
 const env = require("./env/development.env");
 
+const productsRouter = require('./routes/products');
+const categoryRouter = require('./routes/categories');
+
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json());
-
+server.use('/products', productsRouter);
+server.use('/categories', categoryRouter);
 
 
 async.waterfall([
