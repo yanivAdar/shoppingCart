@@ -5,8 +5,10 @@ const async = require('async');
 const mongoose = require('mongoose');
 
 const env = require("./env/development.env");
+
 const productsRouter = require('./routes/products');
 const categoryRouter = require('./routes/categories');
+
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json());
