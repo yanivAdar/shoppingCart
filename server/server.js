@@ -8,12 +8,14 @@ const env = require("./env/development.env");
 
 const productsRouter = require('./routes/products');
 const categoryRouter = require('./routes/categories');
+const userRouter = require('./routes/users');
 
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json());
 server.use('/products', productsRouter);
 server.use('/categories', categoryRouter);
+server.use('/users', userRouter);
 
 
 async.waterfall([
