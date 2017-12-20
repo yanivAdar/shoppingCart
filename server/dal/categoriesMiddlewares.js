@@ -1,4 +1,4 @@
-const Product = require('../models/product-model');
+const Category = require('../models/category-model');
 
 const recivedData = (req, res, err, data, next) => {
     if (err) return res.json(err);
