@@ -11,7 +11,6 @@ export class ProductsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.router.navigate(['categories'], {relativeTo: this.route});
   }
 
 }
