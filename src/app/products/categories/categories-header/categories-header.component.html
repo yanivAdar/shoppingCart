@@ -3,10 +3,11 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active" 
-                [routerLinkActiveOptions]="{exact:true}" 
+                [routerLink]="[category.name,'products']"
                 *ngFor="let category of categories"
+                (click)="displayProd()"
                 style="cursor: pointer"><a>| {{ category.name }} |</a></li>
             </ul>
         </div>
     </div>
-  </nav>
+</nav>
