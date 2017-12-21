@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active" 
+                <li
                 [routerLink]="[category.name,'products']"
                 *ngFor="let category of categories"
-                (click)="displayProd()"
+                (click)="displayProd(category.id)"
                 style="cursor: pointer"><a>| {{ category.name }} |</a></li>
             </ul>
         </div>

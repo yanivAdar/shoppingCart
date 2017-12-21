@@ -1,3 +1,6 @@
-<p>
-  product-list here
-</p>
+<div class="row" *ngIf="currentCategory">
+  <div class="col-md-3" *ngFor="let product of currentCategory.productList"> 
+    <p>name: {{product.name}}</p>
+    <p>price: {{product.price}}</p>
+  </div>
+</div>
