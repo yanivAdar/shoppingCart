@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CategoriesService {
+  categories$$ = new Subject<any>();
   categories;
   categoryId = new Subject<string>();
 
@@ -17,9 +18,6 @@ export class CategoriesService {
 
   getCategory(id) {
     return this.http.get(this.url + id).map(res => res.json());
-  }
-  getIdFromCategory(name) {
-    return this.categoryId = (this.categories.find(category => category.name === name))._id;
   }
 }
 

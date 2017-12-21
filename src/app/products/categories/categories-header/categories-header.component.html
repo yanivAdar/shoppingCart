@@ -5,7 +5,8 @@
                 <li
                 [routerLink]="[category.name,'products']"
                 *ngFor="let category of categories"
-                (click)="displayProd(category.id)"
+                [id]="category._id"
+                (click)="displayProd($event)"
                 style="cursor: pointer"><a>| {{ category.name }} |</a></li>
             </ul>
         </div>

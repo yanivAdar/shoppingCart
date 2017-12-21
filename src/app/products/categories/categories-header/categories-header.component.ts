@@ -10,18 +10,19 @@ import { Subject } from 'rxjs/Subject';
 })
 export class CategoriesHeaderComponent implements OnInit {
   categories = [];
+  id = '';
   constructor(private categoriesService: CategoriesService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.categoriesService.getCategories().subscribe(
       data => {
-        this.categoriesService.categories = data;
+        this.categoriesService.categories$$.next(data);
         this.categories = data
       },
       err => console.log('err: ' + err),
       () => console.log(this.categories));
   }
-  displayProd(id:string) {
-    this.categoriesService.getCategory(id);
+  displayProd(data) {
+    this.categoriesService.categoryId.next(data.currentTarget.id);
   }
 }

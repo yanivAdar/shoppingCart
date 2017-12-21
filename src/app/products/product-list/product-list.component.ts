@@ -14,16 +14,15 @@ export class ProductListComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private categoriesService: CategoriesService, private router: Router) { }
 
   ngOnInit() {
-    if (this.categoriesService.categories) {
-      this.activatedRoute.params.subscribe((res) => {
-        this.id = this.categoriesService.getIdFromCategory(res.category);
-      })
+    this.categoriesService.categoryId.subscribe(id => {
+      this.id = id;
       this.categoriesService.getCategory(this.id).subscribe(res => {
-          this.currentCategory = res[0];
+        this.currentCategory = res[0];
         console.log(this.currentCategory);
       });
-    }
-    
-   // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+    });
   }
+
+  // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+
 }

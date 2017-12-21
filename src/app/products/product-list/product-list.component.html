@@ -1,6 +1,11 @@
 <div class="row" *ngIf="currentCategory">
-  <div class="col-md-3" *ngFor="let product of currentCategory.productList"> 
-    <p>name: {{product.name}}</p>
-    <p>price: {{product.price}}</p>
+  <div class="col-md-3" *ngFor="let product of currentCategory.productList">
+    <a class="list-group-item clearfix styleList" style="cursor:pointer">
+      <p>name: {{product.name}}</p>
+      <p>price: {{product.price}}</p>
+      <div class="pull-right">
+        <img src="{{product.imagePath}}" alt="{{product.name}}" class="img-responsive" style="max-height: 50px;">
+      </div>
+    </a>
   </div>
 </div>
