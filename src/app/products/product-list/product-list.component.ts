@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CategoriesService } from '../../services/categories.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-product-list',
@@ -7,13 +9,20 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
-  constructor(private activatedRoute: ActivatedRoute) { }
+  currentCategory;
+  id;
+  constructor(private activatedRoute: ActivatedRoute, private categoriesService: CategoriesService, private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((res) => {
-      console.log(res, 'compoent');
-      
-    })
+    this.categoriesService.categoryId.subscribe(id => {
+      this.id = id;
+      this.categoriesService.getCategory(this.id).subscribe(res => {
+        this.currentCategory = res[0];
+        console.log(this.currentCategory);
+      });
+    });
   }
+
+  // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
+
 }
