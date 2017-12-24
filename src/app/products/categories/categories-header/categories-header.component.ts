@@ -23,6 +23,6 @@ export class CategoriesHeaderComponent implements OnInit {
       () => console.log(this.categories));
   }
   displayProd(data) {
-    this.categoriesService.categoryId.next(data.currentTarget.id);
+    this.categoriesService.categoryId$$.next(data.currentTarget.id);
   }
 }
