@@ -28,14 +28,9 @@
     "bootstrap": "^3.3.7",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
-    "es6-shim": "^0.35.3",
-    "ng2-recaptcha": "^1.7.0",
-    "ngx-page-scroll": "^4.0.2",
+    "cors": "^2.8.4",
     "rxjs": "^5.1.0",
-    "web-animations-js": "^2.3.1",
-    "ziggeo": "0.0.20",
-    "ziggeo-client-sdk": "0.0.29",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "1.4.4",
