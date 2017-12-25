@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router/';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-products',
@@ -7,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router/';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  showFiller = false;
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {

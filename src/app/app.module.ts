@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
@@ -13,7 +15,6 @@ import { CartComponent } from './products/cart/cart.component';
 import { CategoriesComponent } from './products/categories/categories.component';
 import { CategoriesHeaderComponent } from './products/categories/categories-header/categories-header.component';
 import { CategoriesService } from './services/categories.service';
-
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { CategoriesService } from './services/categories.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    MatSidenavModule,
+    BrowserAnimationsModule
   ],
   providers: [CategoriesService],
   bootstrap: [AppComponent]

@@ -1,9 +1,21 @@
-<div class="row">
-  <div class="col-md-3">
-    <app-cart></app-cart>
-  </div>
-  <div class="col-md-9">
+<mat-drawer-container autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div class="col-md-3">
+      <app-cart></app-cart>
+    </div>
+  </mat-drawer>
+  <button type="button" class="btn btn-default" mat-button (click)="drawer.toggle()">Toggle sidenav</button>
+  <div class="headerPosition">
+    <!-- <div class="headerPosition"> -->
     <app-categories></app-categories>
     <router-outlet></router-outlet>
+    <!-- </div> -->
   </div>
-</div>
+</mat-drawer-container>
+
+<!-- <app-toggle-side-cart></app-toggle-side-cart> -->
+<!-- <p>Auto-resizing sidenav</p>
+  <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+  <button (click)="showFiller = !showFiller" mat-raised-button>
+    Toggle extra text
+  </button> -->
