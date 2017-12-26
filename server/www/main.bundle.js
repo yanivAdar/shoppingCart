@@ -272,7 +272,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  cart works!\n</p>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <h3>\n      My Cart\n    </h3>\n    <hr>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <h4>\n      Products:\n    </h4>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let product of products\" class=\"list-group-item\">\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Name: {{product.name}}</li>\n          <li class=\"list-group-item\">Quantity: {{product.amount}}</li>\n          <li class=\"list-group-item\">Price: {{product.price}}</li>\n        </ul>\n      </li>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -294,6 +294,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var CartComponent = (function () {
     function CartComponent() {
+        this.products = [{ name: "cheese", amount: 4, price: 34 }, { name: "bread", amount: 2, price: 56 }];
     }
     CartComponent.prototype.ngOnInit = function () {
     };
@@ -320,7 +321,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".headerPosition{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    flex-direction: row;\n}\n\n@media (min-width: 768px){\n    .navbar-nav.headerPosition {\n        margin: 0;\n        float: none;\n    }\n}\n", ""]);
 
 // exports
 
@@ -333,7 +334,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/categories/categories-header/categories-header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n        <div class=\"collapse navbar-collapse\">\n            <ul class=\"nav navbar-nav\">\n                <li\n                [routerLink]=\"[category.name,'products']\"\n                *ngFor=\"let category of categories\"\n                [id]=\"category._id\"\n                (click)=\"displayProd($event)\"\n                style=\"cursor: pointer\"><a>| {{ category.name }} |</a></li>\n            </ul>\n        </div>\n    </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n        <div class=\"collapse navbar-collapse\">\n            <ul class=\"nav navbar-nav headerPosition\">\n                <li [routerLink]=\"[category.name,'products']\" *ngFor=\"let category of categories\" [id]=\"category._id\" (click)=\"displayProd($event)\"\n                    style=\"cursor: pointer; \">\n                    <a>| {{ category.name }}</a>\n                </li>\n            </ul>\n        </div>\n    </div>\n</nav>"
 
 /***/ }),
 
@@ -473,7 +474,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/product-list/product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\n  <div class=\"col-md-3\" *ngFor=\"let product of currentCategory.productList\">\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\">\n      <p>name: {{product.name}}</p>\n      <p>price: {{product.price}}</p>\n      <div class=\"pull-right\">\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\n      </div>\n    </a>\n  </div>\n</div>"
+module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\n  <div class=\"col-md-2\" *ngFor=\"let product of currentCategory.productList\">\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\">\n      <p>name: {{product.name}}</p>\n      <p>price: {{product.price}}</p>\n      <div class=\"pull-right\">\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\n      </div>\n    </a>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -567,7 +568,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".headerPosition{\n    float: right;\n}", ""]);
+exports.push([module.i, ".headerPosition{\n    float: right;\n}\n.cartPosition{\n    width: 20%;\n}\n.containerStyle{\n    overflow: hidden;\n    min-height: 500px;\n}\n.contentPageStyle{\n    overflow: hidden;\n}\n\n.navigation-container{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n\n.categories{\n    -webkit-box-flex: 2;\n        -ms-flex-positive: 2;\n            flex-grow: 2;\n}\n\n.side-btn{\n    height: 52px;\n    margin-right: 4px;\n}", ""]);
 
 // exports
 
@@ -580,7 +581,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/products.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-drawer-container autosize>\n  <mat-drawer #drawer class=\"example-sidenav\" mode=\"side\">\n    <div class=\"col-md-3\">\n      <app-cart></app-cart>\n    </div>\n  </mat-drawer>\n  <button type=\"button\" class=\"btn btn-default\" mat-button (click)=\"drawer.toggle()\">Toggle sidenav</button>\n  <div class=\"headerPosition\">\n    <!-- <div class=\"headerPosition\"> -->\n    <app-categories></app-categories>\n    <router-outlet></router-outlet>\n    <!-- </div> -->\n  </div>\n</mat-drawer-container>\n\n<!-- <app-toggle-side-cart></app-toggle-side-cart> -->\n<!-- <p>Auto-resizing sidenav</p>\n  <p *ngIf=\"showFiller\">Lorem, ipsum dolor sit amet consectetur.</p>\n  <button (click)=\"showFiller = !showFiller\" mat-raised-button>\n    Toggle extra text\n  </button> -->"
+module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\n    <div class=\"col-md-12\">\n      <app-cart></app-cart>\n    </div>\n  </mat-drawer>\n  <div class=\"contentPageStyle\">\n    <div class=\"headerPosition col-md-12\">\n      <div class=\"navigation-container\">\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button (click)=\"drawer.toggle()\">\n          <span class=\"glyphicon glyphicon-menu-right\"></span> Cart</button>\n        <app-categories class=\"categories\"></app-categories>\n      </div>\n\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</mat-drawer-container>"
 
 /***/ }),
 
@@ -606,7 +607,6 @@ var ProductsComponent = (function () {
     function ProductsComponent(route, router) {
         this.route = route;
         this.router = router;
-        this.showFiller = false;
     }
     ProductsComponent.prototype.ngOnInit = function () {
     };

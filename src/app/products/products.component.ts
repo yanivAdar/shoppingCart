@@ -8,7 +8,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  showFiller = false;
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {

@@ -1,0 +1,14 @@
+.headerPosition{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+@media (min-width: 768px){
+    .navbar-nav.headerPosition {
+        margin: 0;
+        float: none;
+    }
+}
