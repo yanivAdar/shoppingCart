@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Hi </h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+      <div class="row">
+          <div class="col-xs-12">
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xs-12">
+                  <button type="sumbit" class="btn btn-success" [disabled]="!recipeForm.valid">Save</button>
+                  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" formControlName="name">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="imagePath">Image URL</label>
+                    <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagePath>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <img [src]="imagePath.value" alt="" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text" id="description" class="form-control" formControlName="description" rows="6"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    <!-- <input matInput tabindex="1" [(ngModel)]="data.animal"> -->
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>
