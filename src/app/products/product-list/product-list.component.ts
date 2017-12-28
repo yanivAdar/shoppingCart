@@ -17,8 +17,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   currentCategory;
   id;
-  productForm: FormGroup
-  
+  categories;
+
   constructor(private activatedRoute: ActivatedRoute, private categoriesService: CategoriesService, private router: Router, public dialog: MatDialog) { }
   ngOnInit() {
     this.categoriesService.categoryId$$
@@ -31,28 +31,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.currentCategory = res;
       })
-  }
-
-  initForm(){
-    this.productForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'imagePath': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
+    this.categoriesService.categories$$.subscribe((res) => {
+      this.categories = res;
     });
   }
+
 
   openDialog(): void {
+
     let dialogRef = this.dialog.open(AddProductListComponent, {
-      // width: '250px',
-      data: { 
-        
+      data: {
+        categories: this.categories
       }
-      // this.initForm()
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // this.animal = result;
-    });
+    dialogRef.afterClosed().subscribe(result => { });
+
+    // this.animal = result;
   }
 
   // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
@@ -72,12 +67,28 @@ export class ProductListComponent implements OnInit, OnDestroy {
   templateUrl: 'add-product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class AddProductListComponent {
+export class AddProductListComponent implements OnInit {
+  productForm: FormGroup
+  categories = this.data;
 
-  constructor(
-    public dialogRef: MatDialogRef<AddProductListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
+  ngOnInit() {
+    this.initForm();
+    console.log(this.categories);
+
+  }
+  initForm() {
+    this.productForm = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'imagePath': new FormControl(null, Validators.required),
+      'price': new FormControl(null, Validators.required),
+      'category': new FormControl(null, Validators.required)
+    });
+  }
+  onSubmit() {
+
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

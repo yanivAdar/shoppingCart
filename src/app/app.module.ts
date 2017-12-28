@@ -17,6 +17,7 @@ import { CategoriesComponent } from './products/categories/categories.component'
 import { CategoriesHeaderComponent } from './products/categories/categories-header/categories-header.component';
 import { CategoriesService } from './services/categories.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductsService } from './services/products.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
 
   ],
-  providers: [CategoriesService],
+  providers: [CategoriesService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
