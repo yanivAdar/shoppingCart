@@ -81,7 +81,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
+module.exports = "<app-header></app-header>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -137,7 +137,6 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__products_categories_categories_component__ = __webpack_require__("../../../../../src/app/products/categories/categories.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__products_categories_categories_header_categories_header_component__ = __webpack_require__("../../../../../src/app/products/categories/categories-header/categories-header.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_categories_service__ = __webpack_require__("../../../../../src/app/services/categories.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_categories_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__services_categories_service__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_products_service__ = __webpack_require__("../../../../../src/app/services/products.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -186,13 +185,13 @@ AppModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_10__app_routing_module__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_material_sidenav__["a" /* MatSidenavModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_material__["c" /* MatDialogModule */],
             __WEBPACK_IMPORTED_MODULE_16__angular_forms__["i" /* ReactiveFormsModule */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_15__services_categories_service__["CategoriesService"], __WEBPACK_IMPORTED_MODULE_17__services_products_service__["a" /* ProductsService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_15__services_categories_service__["a" /* CategoriesService */], __WEBPACK_IMPORTED_MODULE_17__services_products_service__["a" /* ProductsService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -222,7 +221,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n      <div class=\"navbar-header\">\n          <a routerLink=\"/\" class=\"navbar-brand\">Shopping Cart Project</a>\n      </div>\n      <div class=\"collapse navbar-collapse\">\n          <ul class=\"nav navbar-nav\">\n              <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li>\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\n          </ul>\n          <ul class=\"nav navbar-nav navbar-right\">\n              <!-- <li style=\"cursor: pointer\" class=\"dropdown\" appDropdown>\n                  <a class=\"dropdown-toggle\" roll=\"button\">Manage shopping <span class=\"caret\"></span></a>\n                  <ul class=\"dropdown-menu\">\n                      <li><a style=\"cursor: pointer\">Save data</a></li>\n                      <li><a style=\"cursor: pointer\">Fetch data</a></li>\n                  </ul>\n              </li> -->\n          </ul>\n      </div>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n      <div class=\"navbar-header\">\r\n          <a routerLink=\"/\" class=\"navbar-brand\">Shopping Cart Project</a>\r\n      </div>\r\n      <div class=\"collapse navbar-collapse\">\r\n          <ul class=\"nav navbar-nav\">\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li>\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\r\n          </ul>\r\n          <ul class=\"nav navbar-nav navbar-right\">\r\n              <!-- <li style=\"cursor: pointer\" class=\"dropdown\" appDropdown>\r\n                  <a class=\"dropdown-toggle\" roll=\"button\">Manage shopping <span class=\"caret\"></span></a>\r\n                  <ul class=\"dropdown-menu\">\r\n                      <li><a style=\"cursor: pointer\">Save data</a></li>\r\n                      <li><a style=\"cursor: pointer\">Fetch data</a></li>\r\n                  </ul>\r\n              </li> -->\r\n          </ul>\r\n      </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -283,7 +282,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <h3>\n      My Cart\n    </h3>\n    <hr>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <h4>\n      Products:\n    </h4>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let product of products\" class=\"list-group-item\">\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Name: {{product.name}}</li>\n          <li class=\"list-group-item\">Quantity: {{product.amount}}</li>\n          <li class=\"list-group-item\">Price: {{product.price}}</li>\n        </ul>\n      </li>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let product of products\" class=\"list-group-item\">\r\n        <ul class=\"list-group\">\r\n          <li class=\"list-group-item\">Name: {{product.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{product.amount}}</li>\r\n          <li class=\"list-group-item\">Price: {{product.price}}</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -332,7 +331,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".headerPosition{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    flex-direction: row;\n}\n\n@media (min-width: 768px){\n    .navbar-nav.headerPosition {\n        margin: 0;\n        float: none;\n    }\n}\n", ""]);
+exports.push([module.i, ".headerPosition{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: horizontal;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: row;\r\n            flex-direction: row;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n@media (min-width: 768px){\r\n    .navbar-nav.headerPosition {\r\n        margin: 0;\r\n        float: none;\r\n    }\r\n}\r\n", ""]);
 
 // exports
 
@@ -345,7 +344,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/categories/categories-header/categories-header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n        <div class=\"collapse navbar-collapse\">\n            <ul class=\"nav navbar-nav headerPosition\">\n                <li [routerLink]=\"[category.name,'products']\" *ngFor=\"let category of categories\" [id]=\"category._id\" (click)=\"displayProd($event)\"\n                    style=\"cursor: pointer; \">\n                    <a>| {{ category.name }}</a>\n                </li>\n            </ul>\n        </div>\n    </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"collapse navbar-collapse\">\r\n            <ul class=\"nav navbar-nav headerPosition\">\r\n                <li [routerLink]=\"[category.name,'products']\" *ngFor=\"let category of categories\" [id]=\"category._id\" (click)=\"displayProd($event)\"\r\n                    style=\"cursor: pointer; \">\r\n                    <a>| {{ category.name }}</a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</nav>"
 
 /***/ }),
 
@@ -356,7 +355,6 @@ module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"contai
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoriesHeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_categories_service__ = __webpack_require__("../../../../../src/app/services/categories.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_categories_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__services_categories_service__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -396,7 +394,7 @@ CategoriesHeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/products/categories/categories-header/categories-header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/products/categories/categories-header/categories-header.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_categories_service__["CategoriesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_categories_service__["CategoriesService"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_categories_service__["a" /* CategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_categories_service__["a" /* CategoriesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], CategoriesHeaderComponent);
 
 var _a, _b, _c;
@@ -425,7 +423,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/categories/categories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <app-categories-header></app-categories-header>\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n  </div>\n</div>"
+module.exports = "  <app-categories-header></app-categories-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -468,7 +466,7 @@ CategoriesComponent = __decorate([
 /***/ "../../../../../src/app/products/product-list/add-product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Add Product</h1>\n<div mat-dialog-content>\n  <mat-form-field>\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\">\n          <div class=\"row\">\n            <div class=\"col-xs-6\">\n              <div class=\"form-group\">\n                <label for=\"name\">Name</label>\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\n              </div>\n            </div>\n            <div class=\"col-xs-6\">\n              <div class=\"form-group\">\n                <label for=\"imagePath\">Image URL</label>\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-xs-6 pull-right\">\n              <div class=\"form-group\">\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\n              </div>\n            </div>\n            <div class=\"col-xs-6\">\n              <div class=\"form-group\">\n                <label for=\"price\">Price</label>\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\n              </div>\n            </div>\n          <!-- </div>\n          <div class=\"row\"> -->\n            <div class=\"col-xs-6\">\n              <div class=\"form-group\">\n                <div *ngIf=\"categories\">\n                  <label for=\"category\">Categories</label>\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\n                    <option *ngFor=\"let category of categories.categories\" value=\"category.name\" >{{ category.name }}</option>\n                  </select>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-xs-12\">\n              <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onNoClick()\" [disabled]=\"!productForm.valid\">Save</button>\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\n            </div>\n          </div>\n        </form>\n      </div>\n    </div>\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\n  </mat-form-field>\n</div>\n<div mat-dialog-actions>\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\n</div>"
+module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\r\n              </div>\r\n            </div>\r\n          <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"categories\">\r\n                  <label for=\"category\">Categories</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\" selected>Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\"\r\n                    [value]=\"category._id\" >{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onNoClick()\" [disabled]=\"!productForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
 
 /***/ }),
 
@@ -480,7 +478,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "::ng-deep .mat-dialog-container{\n    margin-top: -250px;    \n}\n\n.imgStyle{\n    max-height: 180px;\n}", ""]);
+exports.push([module.i, "::ng-deep .mat-dialog-container{\r\n    margin-top: -250px;    \r\n}\r\n\r\n.imgStyle{\r\n    max-height: 180px;\r\n}", ""]);
 
 // exports
 
@@ -493,7 +491,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/product-list/product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\n  <div class=\"col-md-2\" *ngFor=\"let product of currentCategory.productList\">\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\">\n      <p>name: {{product.name}}</p>\n      <p>price: {{product.price}}</p>\n      <div class=\"pull-right\">\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\n      </div>\n    </a>\n  </div>\n  <div class=\"col-md-2\">\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer; height: 132px\" mat-raised-button (click)=\"openDialog()\">\n      <h2>Add <span style=\"font-size: 20px\" class=\"glyphicon glyphicon-plus\"></span> Product</h2>\n    </a>\n  </div>\n</div>"
+module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\r\n  <div class=\"col-md-2\" *ngFor=\"let product of currentCategory.productList\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\">\r\n      <p>name: {{product.name}}</p>\r\n      <p>price: {{product.price}}</p>\r\n      <div class=\"pull-right\">\r\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\r\n      </div>\r\n    </a>\r\n  </div>\r\n  <div class=\"col-md-2\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer; height: 132px\" mat-raised-button (click)=\"openDialog()\">\r\n      <h2>Add <span style=\"font-size: 20px\" class=\"glyphicon glyphicon-plus\"></span> Product</h2>\r\n    </a>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -506,7 +504,6 @@ module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_categories_service__ = __webpack_require__("../../../../../src/app/services/categories.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_categories_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__services_categories_service__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("../../../../rxjs/Subject.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
@@ -517,6 +514,7 @@ module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_switchMap__ = __webpack_require__("../../../../rxjs/add/operator/switchMap.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_switchMap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_products_service__ = __webpack_require__("../../../../../src/app/services/products.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -529,6 +527,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+
 
 
 
@@ -565,7 +564,8 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.openDialog = function () {
         var dialogRef = this.dialog.open(AddProductListComponent, {
             data: {
-                categories: this.categories
+                categories: this.categories,
+                currentCategory: this.currentCategory
             }
         });
         dialogRef.afterClosed().subscribe(function (result) { });
@@ -584,30 +584,36 @@ ProductListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/products/product-list/product-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/products/product-list/product-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["CategoriesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["CategoriesService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */]) === "function" && _d || Object])
 ], ProductListComponent);
 
 //---------------------Dialog Component .ts file--------------------
 var AddProductListComponent = (function () {
-    function AddProductListComponent(dialogRef, data, categoriesService) {
+    function AddProductListComponent(productService, dialogRef, data, categoriesService) {
+        this.productService = productService;
         this.dialogRef = dialogRef;
         this.data = data;
         this.categoriesService = categoriesService;
-        this.categories = this.data;
+        this.categories = this.data.categories;
+        this.current = this.data.currentCategory;
     }
     AddProductListComponent.prototype.ngOnInit = function () {
         this.initForm();
         console.log(this.categories);
+        console.log(this.current.name);
     };
     AddProductListComponent.prototype.initForm = function () {
         this.productForm = new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["c" /* FormGroup */]({
             'name': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["j" /* Validators */].required),
             'imagePath': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["j" /* Validators */].required),
             'price': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["j" /* Validators */].required),
-            'category': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["j" /* Validators */].required)
+            'category': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.current.name, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["j" /* Validators */].required)
         });
     };
     AddProductListComponent.prototype.onSubmit = function () {
+        this.productService.addProductByCategory(this.productForm.value).subscribe(function (res) {
+            console.log(res);
+        });
     };
     AddProductListComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
@@ -620,11 +626,11 @@ AddProductListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/products/product-list/add-product-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/products/product-list/product-list.component.css")]
     }),
-    __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */]) === "function" && _e || Object, Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["CategoriesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["CategoriesService"]) === "function" && _f || Object])
+    __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MAT_DIALOG_DATA */])),
+    __metadata("design:paramtypes", [typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */]) === "function" && _f || Object, Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */]) === "function" && _g || Object])
 ], AddProductListComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=product-list.component.js.map
 
 /***/ }),
@@ -637,7 +643,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".headerPosition{\n    float: right;\n}\n.cartPosition{\n    width: 20%;\n}\n.containerStyle{\n    overflow: hidden;\n    min-height: 500px;\n}\n.contentPageStyle{\n    overflow: hidden;\n}\n\n.navigation-container{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n\n.categories{\n    -webkit-box-flex: 2;\n        -ms-flex-positive: 2;\n            flex-grow: 2;\n}\n\n.side-btn{\n    height: 52px;\n    margin-right: 4px;\n}", ""]);
+exports.push([module.i, ".headerPosition{\r\n    float: right;\r\n}\r\n.cartPosition{\r\n    width: 20%;\r\n}\r\n.containerStyle{\r\n    overflow: hidden;\r\n    min-height: 500px;\r\n}\r\n.contentPageStyle{\r\n    overflow: hidden;\r\n}\r\n\r\n.navigation-container{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: horizontal;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: row;\r\n            flex-direction: row;\r\n}\r\n\r\n.categories{\r\n    -webkit-box-flex: 2;\r\n        -ms-flex-positive: 2;\r\n            flex-grow: 2;\r\n}\r\n\r\n.side-btn{\r\n    height: 52px;\r\n    margin-right: 4px;\r\n}", ""]);
 
 // exports
 
@@ -650,7 +656,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/products.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\n    <div class=\"col-md-12\">\n      <app-cart></app-cart>\n    </div>\n  </mat-drawer>\n  <div class=\"contentPageStyle\">\n    <div class=\"headerPosition col-md-12\">\n      <div class=\"navigation-container\">\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button (click)=\"drawer.toggle()\">\n          <span class=\"glyphicon glyphicon-menu-right\"></span> Cart</button>\n        <app-categories class=\"categories\"></app-categories>\n      </div>\n\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</mat-drawer-container>"
+module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\r\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\r\n    <div class=\"col-md-12\">\r\n      <app-cart></app-cart>\r\n    </div>\r\n  </mat-drawer>\r\n  <div class=\"contentPageStyle\">\r\n    <div class=\"headerPosition col-md-12\">\r\n      <div class=\"navigation-container\">\r\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button (click)=\"drawer.toggle()\">\r\n          <span class=\"glyphicon glyphicon-menu-right\"></span> Cart</button>\r\n        <app-categories class=\"categories\"></app-categories>\r\n      </div>\r\n\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</mat-drawer-container>"
 
 /***/ }),
 
@@ -716,7 +722,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  search works!\n</p>\n"
+module.exports = "<p>\r\n  search works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -757,10 +763,55 @@ SearchComponent = __decorate([
 /***/ }),
 
 /***/ "../../../../../src/app/services/categories.service.ts":
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoriesService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("../../../../rxjs/Subject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_ReplaySubject__ = __webpack_require__("../../../../rxjs/ReplaySubject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_ReplaySubject__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
+
+
+
+
+var CategoriesService = (function () {
+    function CategoriesService(http) {
+        this.http = http;
+        this.categories$$ = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.categoryId$$ = new __WEBPACK_IMPORTED_MODULE_4_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.url = 'http://localhost:4500/categories/';
+    }
+    CategoriesService.prototype.getCategories = function () {
+        return this.http.get(this.url).map(function (res) { return res.json(); });
+    };
+    ;
+    CategoriesService.prototype.getCategory = function (id) {
+        return this.http.get(this.url + id).map(function (res) { return res.json(); });
+    };
+    return CategoriesService;
+}());
+CategoriesService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], CategoriesService);
+
+var _a;
+//# sourceMappingURL=categories.service.js.map
 
 /***/ }),
 
@@ -785,16 +836,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ProductsService = (function () {
     function ProductsService(http) {
         this.http = http;
-        this.url = 'http://localhost:4500/products/';
+        this.url = 'http://localhost:4500/products';
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({
+            'Content-Type': 'application/json',
+            'Accept': 'q=0.8;application/json;q=0.9'
+        });
+        this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: this.headers });
     }
     ProductsService.prototype.addProductByCategory = function (data) {
-        return this.http.put(this.url, data).map(function (res) { return res.json(); });
+        return this.http.put(this.url, JSON.stringify(data), this.options).map(function (res) { return res.json(); });
     };
     return ProductsService;
 }());
 ProductsService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ProductsService);
 
 var _a;

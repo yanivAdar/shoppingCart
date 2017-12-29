@@ -7,6 +7,7 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -41,7 +42,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     let dialogRef = this.dialog.open(AddProductListComponent, {
       data: {
-        categories: this.categories
+        categories: this.categories,
+        currentCategory: this.currentCategory
       }
     });
 
@@ -69,13 +71,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
 })
 export class AddProductListComponent implements OnInit {
   productForm: FormGroup
-  categories = this.data;
+  categories = this.data.categories;
+  current = this.data.currentCategory;
 
-  constructor(public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
+  constructor(private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
     this.initForm();
     console.log(this.categories);
+    console.log(this.current.name);
+    
 
   }
   initForm() {
@@ -83,11 +88,14 @@ export class AddProductListComponent implements OnInit {
       'name': new FormControl(null, Validators.required),
       'imagePath': new FormControl(null, Validators.required),
       'price': new FormControl(null, Validators.required),
-      'category': new FormControl(null, Validators.required)
+      'category': new FormControl(this.current.name, Validators.required)
     });
   }
   onSubmit() {
-
+    this.productService.addProductByCategory(this.productForm.value).subscribe(res=>{
+      console.log(res);
+      
+    });
   }
   onNoClick(): void {
     this.dialogRef.close();
