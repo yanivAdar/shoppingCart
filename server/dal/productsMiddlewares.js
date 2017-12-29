@@ -1,4 +1,5 @@
 const Product = require('../models/product-model');
+const Category = require('../models/category-model');
 
 const recivedData = (req, res, err, data, next) => {
     if (err) return res.json(err);
@@ -13,6 +14,7 @@ const getSingleProduct = (req, res, next) => {
 }
 const createNewProduct = (req, res, next) => {
     const { name, price, imagePath, category } = req.body
+    // Category.find({_id: category}).populate()
     const newProduct = new Product({ name, price, imagePath, category });
     newProduct.save((err, data) => recivedData(req, res, err, data, next));
 }
