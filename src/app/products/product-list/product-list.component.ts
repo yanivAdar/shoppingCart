@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
 import { Subject } from 'rxjs/Subject';
@@ -16,7 +16,7 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
-  currentCategory;
+  @Output() currentCategory;
   id;
   categories;
 
@@ -48,11 +48,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => { });
-
-    // this.animal = result;
   }
-
-  // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
@@ -72,7 +68,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 export class AddProductListComponent implements OnInit {
   productForm: FormGroup
   categories = this.data.categories;
-  current = this.data.currentCategory;
+  current = this.data.currentCategory; 
 
   constructor(private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
@@ -94,7 +90,7 @@ export class AddProductListComponent implements OnInit {
   onSubmit() {
     this.productService.addProductByCategory(this.productForm.value).subscribe(res=>{
       console.log(res);
-      
+    this.categoriesService.categoryId$$.next(res._id);
     });
   }
   onNoClick(): void {

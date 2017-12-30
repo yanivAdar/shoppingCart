@@ -7,23 +7,31 @@ const recivedData = (req, res, err, data, next) => {
     next();
 }
 const getAllProducts = (req, res, next) => {
-    Product.find({}).populate('category', 'name').exec((err, data) => recivedData(req, res, err, data, next));
+    Product.find({}).populate('category', 'name')
+        .exec((err, data) => recivedData(req, res, err, data, next));
 }
 const getSingleProduct = (req, res, next) => {
-    Product.find({ _id: req.params.id }).populate('category', 'name').exec((err, data) => recivedData(req, res, err, data, next));
+    Product.find({ _id: req.params.id }).populate('category', 'name')
+        .exec((err, data) => recivedData(req, res, err, data, next));
 }
 const createNewProduct = (req, res, next) => {
     const { name, price, imagePath, category } = req.body
-    // Category.find({_id: category}).populate()
     const newProduct = new Product({ name, price, imagePath, category });
     newProduct.save((err, data) => recivedData(req, res, err, data, next));
 }
+const populateCategoryProduct = (req, res, next) => {
+    Category.findByIdAndUpdate(req.data.category, { $push: { "productList": req.data._id }},{ new: true },
+    (err, data) => recivedData(req, res, err, data, next));
+}
+
 const updateProduct = (req, res, next) => {
     const { name, price, imagePath, category } = req.body;
-    Product.update({ _id: req.params.id }, { name, price, imagePath, category }, (err, data) => recivedData(req, res, err, data, next));
+    Product.update({ _id: req.params.id }, { name, price, imagePath, category },
+        (err, data) => recivedData(req, res, err, data, next));
 }
 const deleteProduct = (req, res, next) => {
-    Product.remove({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data, next));
+    Product.remove({ _id: req.params.id },
+        (err, data) => recivedData(req, res, err, data, next));
 }
 
 module.exports = {
@@ -31,5 +39,6 @@ module.exports = {
     getSingleProduct,
     createNewProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    populateCategoryProduct
 }

@@ -466,7 +466,7 @@ CategoriesComponent = __decorate([
 /***/ "../../../../../src/app/products/product-list/add-product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\r\n              </div>\r\n            </div>\r\n          <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"categories\">\r\n                  <label for=\"category\">Categories</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\" selected>Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\"\r\n                    [value]=\"category._id\" >{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onNoClick()\" [disabled]=\"!productForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\r\n              </div>\r\n            </div>\r\n          <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"categories\">\r\n                  <label for=\"category\">Categories</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\"\r\n                    [selected]=\"category.name === current.name\"\r\n                    [value]=\"category._id\" >{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onNoClick()\" [disabled]=\"!productForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
 
 /***/ }),
 
@@ -569,15 +569,17 @@ var ProductListComponent = (function () {
             }
         });
         dialogRef.afterClosed().subscribe(function (result) { });
-        // this.animal = result;
     };
-    // this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     ProductListComponent.prototype.ngOnDestroy = function () {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
     };
     return ProductListComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Output */])(),
+    __metadata("design:type", Object)
+], ProductListComponent.prototype, "currentCategory", void 0);
 ProductListComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-product-list',
@@ -611,8 +613,10 @@ var AddProductListComponent = (function () {
         });
     };
     AddProductListComponent.prototype.onSubmit = function () {
+        var _this = this;
         this.productService.addProductByCategory(this.productForm.value).subscribe(function (res) {
             console.log(res);
+            _this.categoriesService.categoryId$$.next(res._id);
         });
     };
     AddProductListComponent.prototype.onNoClick = function () {
