@@ -6,7 +6,7 @@ router.get('/', productsMiddlewares.getAllProducts, (req, res) => res.json(req.d
 
 router.get('/:id', productsMiddlewares.getSingleProduct, (req, res) => { res.json(req.data) });
 
-router.put('/', productsMiddlewares.createNewProduct, (req, res) => { res.json(req.data) });
+router.put('/', productsMiddlewares.createNewProduct, productsMiddlewares.populateCategoryProduct, (req, res) => { res.json(req.data) });
 
 router.patch('/:id', productsMiddlewares.updateProduct, (req,res)=> res.json({success: true}));
 
