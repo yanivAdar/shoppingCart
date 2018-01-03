@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const async = require('async');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path')
+const path = require('path');
+const defaultBehavior = require('./dal/defaultSettings');
 
 const env = require("./env/development.env");
 
@@ -15,6 +16,7 @@ const userRouter = require('./routes/users');
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json());
 server.use(cors());
+// server.use(defaultBehavior.createDefaultCategories());
 //Point static path to dist
 server.use(express.static(path.join(__dirname, './www')));
 
@@ -27,7 +29,8 @@ server.get('*', (req, res) => {
 
 async.waterfall([
     callback => mongoose.connect(process.env.CONNECTION_STRING, { useMongoClient: true }, err => callback(err)),
-    callback => server.listen(process.env.PORT, err => callback(err))
+    callback => server.listen(process.env.PORT, err => callback(err)),
+    // callback => defaultBehavior.createDefaultCategories( err => callback(err))
 ], (err, results) => {
     if (err) {
         return console.log(err);
