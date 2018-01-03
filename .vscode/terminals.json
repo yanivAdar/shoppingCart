@@ -1,0 +1,22 @@
+{
+  "autorun": true,
+  "terminals": [
+    {
+      "name": "server",
+      "description": "Many special strings can be substituted dynamically",
+      "commands": [
+        "cd server && nodemon"
+      ],
+      "execute": true,
+      "focus": true
+    },
+    {
+      "name": "client",
+      "description": "Many special strings can be substituted dynamically",
+      "commands": [
+        "cd client ng build --watch"
+      ],
+      "execute": true
+    }
+  ]
+}

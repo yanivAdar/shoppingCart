@@ -1,0 +1,16 @@
+<div class="row" *ngIf="currentCategory && currentCategory.productList">
+  <div class="col-md-2" *ngFor="let product of currentCategory.productList">
+    <a class="list-group-item clearfix styleList" style="cursor:pointer">
+      <p>name: {{product.name}}</p>
+      <p>price: {{product.price}}</p>
+      <div class="pull-right">
+        <img src="{{product.imagePath}}" alt="{{product.name}}" class="img-responsive" style="max-height: 50px;">
+      </div>
+    </a>
+  </div>
+  <div class="col-md-2">
+    <a class="list-group-item clearfix styleList" style="cursor:pointer; height: 132px" mat-raised-button (click)="openDialog()">
+      <h2>Add <span style="font-size: 20px" class="glyphicon glyphicon-plus"></span> Product</h2>
+    </a>
+  </div>
+</div>
