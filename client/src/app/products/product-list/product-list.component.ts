@@ -74,11 +74,8 @@ export class AddProductListComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    console.log(this.categories);
-    console.log(this.current.name);
-    
-
   }
+  
   initForm() {
     this.productForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
@@ -89,7 +86,7 @@ export class AddProductListComponent implements OnInit {
   }
   onSubmit() {
     this.productService.addProductByCategory(this.productForm.value).subscribe(res=>{
-      console.log(res);
+      console.log('the result of the adding is: ',res);
     this.categoriesService.categoryId$$.next(res._id);
     });
   }

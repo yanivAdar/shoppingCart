@@ -20,8 +20,18 @@ const createNewProduct = (req, res, next) => {
     newProduct.save((err, data) => recivedData(req, res, err, data, next));
 }
 const populateCategoryProduct = (req, res, next) => {
-    Category.findByIdAndUpdate(req.data.category, { $push: { "productList": req.data._id }},{ new: true },
-    (err, data) => recivedData(req, res, err, data, next));
+    Category.findByIdAndUpdate(req.data.category, { $push: { "productList": req.data._id } }, { new: true },
+        (err, data) => recivedData(req, res, err, data, next));
+}
+
+const populateDefaultCategory = (req, res, next) => {
+    console.log(req);
+    
+    Category.update({ name: 'General' }, { $push: { 'productList': req.data.productList[0] } }, { new: true },
+        (err, data) => {
+            if (err) return res.json(err);
+            next();
+        });
 }
 
 const updateProduct = (req, res, next) => {
@@ -40,5 +50,6 @@ module.exports = {
     createNewProduct,
     updateProduct,
     deleteProduct,
-    populateCategoryProduct
+    populateCategoryProduct,
+    populateDefaultCategory
 }

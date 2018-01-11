@@ -6,10 +6,10 @@ router.get('/', productsMiddlewares.getAllProducts, (req, res) => res.json(req.d
 
 router.get('/:id', productsMiddlewares.getSingleProduct, (req, res) => { res.json(req.data) });
 
-router.put('/', productsMiddlewares.createNewProduct, productsMiddlewares.populateCategoryProduct, (req, res) => { res.json(req.data) });
+router.put('/', productsMiddlewares.createNewProduct, productsMiddlewares.populateCategoryProduct, productsMiddlewares.populateDefaultCategory, (req, res) => { res.json(req.data) });
 
-router.patch('/:id', productsMiddlewares.updateProduct, (req,res)=> res.json({success: true}));
+router.patch('/:id', productsMiddlewares.updateProduct, (req, res) => res.json({ success: true }));
 
-router.delete('/:id', productsMiddlewares.deleteProduct, (req,res)=> res.json({success: true}));
+router.delete('/:id', productsMiddlewares.deleteProduct, (req, res) => res.json({ success: true }));
 
 module.exports = router;
