@@ -34,14 +34,13 @@
           <div class="row"> -->
             <div class="col-xs-6">
               <div class="form-group">
-                <div *ngIf="categories">
-                  <label for="category">Categories</label>
-                  <select formControlName="category" id="category" class="form-control">
-                    <option value="" disabled="true">Choose Category</option>
-                    <option *ngFor="let category of categories"
-                    [selected]="category.name === current.name"
-                    [value]="category._id" >{{ category.name }}</option>
-                  </select>
+                  <div *ngIf="current.name == 'General'">
+                    <label for="category">Category</label>
+                    <select formControlName="category" id="category" class="form-control">
+                      <option value="" disabled="true">Choose Category</option>
+                      <option *ngFor="let category of categories"
+                      [value]="category._id" >{{ category.name }}</option>
+                    </select>
                 </div>
               </div>
             </div>

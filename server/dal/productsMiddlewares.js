@@ -22,16 +22,15 @@ const createNewProduct = (req, res, next) => {
 const populateCategoryProduct = (req, res, next) => {
     Category.findByIdAndUpdate(req.data.category, { $push: { "productList": req.data._id } }, { new: true },
         (err, data) => recivedData(req, res, err, data, next));
-}
-
-const populateDefaultCategory = (req, res, next) => {
-    console.log(req);
+    }
     
-    Category.update({ name: 'General' }, { $push: { 'productList': req.data.productList[0] } }, { new: true },
-        (err, data) => {
-            if (err) return res.json(err);
-            next();
-        });
+    const populateDefaultCategory = (req, res, next) => {
+        if(req.data.name == 'General'){
+            return next();
+        }
+        const lastProd = req.data.productList.length-1;
+        Category.update({ name: 'General' }, { $push: { 'productList': req.data.productList[lastProd] } }, { new: true },
+        (err, data) => recivedData(req, res, err, data, next));
 }
 
 const updateProduct = (req, res, next) => {

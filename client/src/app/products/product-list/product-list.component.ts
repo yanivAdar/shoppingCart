@@ -81,10 +81,12 @@ export class AddProductListComponent implements OnInit {
       'name': new FormControl(null, Validators.required),
       'imagePath': new FormControl(null, Validators.required),
       'price': new FormControl(null, Validators.required),
-      'category': new FormControl(this.current.name, Validators.required)
+      'category': new FormControl(this.current._id)
     });
   }
   onSubmit() {
+    console.log(this.productForm.value);
+  
     this.productService.addProductByCategory(this.productForm.value).subscribe(res=>{
       console.log('the result of the adding is: ',res);
     this.categoriesService.categoryId$$.next(res._id);
