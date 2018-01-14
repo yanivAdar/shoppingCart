@@ -14,7 +14,7 @@
       "name": "client",
       "description": "Many special strings can be substituted dynamically",
       "commands": [
-        "cd client ng build --watch"
+        "cd client && ng build --watch"
       ],
       "execute": true
     }
