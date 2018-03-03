@@ -331,7 +331,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".headerPosition{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: horizontal;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: row;\r\n            flex-direction: row;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n@media (min-width: 768px){\r\n    .navbar-nav.headerPosition {\r\n        margin: 0;\r\n        float: none;\r\n    }\r\n}\r\n", ""]);
+exports.push([module.i, ".headerPosition{\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-direction: row;\r\n        flex-direction: row;\r\n    -ms-flex-pack: center;\r\n        justify-content: center;\r\n    -ms-flex-align: center;\r\n        align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n@media (min-width: 768px){\r\n    .navbar-nav.headerPosition {\r\n        margin: 0;\r\n        float: none;\r\n    }\r\n}\r\n", ""]);
 
 // exports
 
@@ -646,7 +646,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".headerPosition{\r\n    float: right;\r\n}\r\n.cartPosition{\r\n    width: 20%;\r\n}\r\n.containerStyle{\r\n    overflow: hidden;\r\n    min-height: 500px;\r\n}\r\n.contentPageStyle{\r\n    overflow: hidden;\r\n}\r\n\r\n.navigation-container{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: horizontal;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: row;\r\n            flex-direction: row;\r\n}\r\n\r\n.categories{\r\n    -webkit-box-flex: 2;\r\n        -ms-flex-positive: 2;\r\n            flex-grow: 2;\r\n}\r\n\r\n.side-btn{\r\n    height: 52px;\r\n    margin-right: 4px;\r\n}", ""]);
+exports.push([module.i, ".headerPosition{\r\n    float: right;\r\n}\r\n.cartPosition{\r\n    width: 20%;\r\n}\r\n.containerStyle{\r\n    overflow: hidden;\r\n    min-height: 500px;\r\n}\r\n.contentPageStyle{\r\n    overflow: hidden;\r\n}\r\n\r\n.navigation-container{\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-direction: row;\r\n        flex-direction: row;\r\n}\r\n\r\n.categories{\r\n    -ms-flex-positive: 2;\r\n        flex-grow: 2;\r\n}\r\n\r\n.side-btn{\r\n    height: 52px;\r\n    margin-right: 4px;\r\n}", ""]);
 
 // exports
 

@@ -7,7 +7,7 @@ const createDefaultCategories = (cb) => {
             const defaultCategory = new Category({ name: 'General' });
             defaultCategory.save((err, data) => {
                 if (err) throw error;
-                console.log(data);
+                console.log("category: 'General' was created!");
             })
         }
     });
