@@ -1,9 +1,8 @@
 const User = require('../models/users-model');
 
 const passportHandlers = {
-  login: (name, password, done) => {
-    console.log('name',name);
-    User.findOne({name}, (err, user) => {
+  login: (username, password, done) => {
+    User.findOne({username}, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -22,6 +21,8 @@ const passportHandlers = {
     if (req.isAuthenticated()) {
       return next();
     }
+    console.log('not ok');
+    
     return res.sendStatus(401);
   }
 }

@@ -50,15 +50,8 @@ server.use(passport.session());
 //Point static path to dist
 server.use(express.static(path.join(__dirname, './www')));
 
-//----middlewares for specific routed requests----
-server.use('/products', productsRouter);
-server.use('/categories', categoryRouter);
-server.use('/users', userRouter);
-server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './www/index.html'));
-});
 
-//----temp login logout routes----
+// ----temp login logout routes----
 // server.post('/login',
 //     passport.authenticate('local', {
 //         successRedirect: '/welcome.html',
@@ -67,13 +60,9 @@ server.get('*', (req, res) => {
 // )
 
 server.post('/login',
-    passport.authenticate('local', {
-        failureRedirect: '/login.html'
-    }), (req,res)=>{
-        
-        
-        res.send('ok');
-    }
+    passport.authenticate('local',{
+        successRedirect: (req, res) => res.send('ok')
+    }) 
 )
 
 server.get('/logout', (req, res) => {
@@ -82,6 +71,13 @@ server.get('/logout', (req, res) => {
 })
 server.use('/', passportConfig.validatedUser);
 
+//----middlewares for specific routed requests----
+server.use('/products', productsRouter);
+server.use('/categories', passportConfig.validatedUser, categoryRouter);
+server.use('/users', userRouter);
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './www/index.html'));
+});
 //----connecting and default settings----
 async.waterfall([
     callback => mongoose.connect(process.env.CONNECTION_STRING, { useMongoClient: true }, err => callback(err)),
