@@ -1,12 +1,13 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
       <div class="navbar-header">
-          <a routerLink="/" class="navbar-brand">Shopping Cart Project</a>
+          <a routerLink="/shopping-main" class="navbar-brand">Shopping Cart Project</a>
       </div>
-      <div class="collapse navbar-collapse">
+      <div>
           <ul class="nav navbar-nav">
               <li routerLinkActive="active"><a routerLink="/search">Search</a></li>
               <li routerLinkActive="active"><a routerLink="/shopping-main">Products</a></li>
+              <li routerLinkActive="active"><a (click)="onLogout()">Logout</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <!-- <li style="cursor: pointer" class="dropdown" appDropdown>

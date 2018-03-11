@@ -52,29 +52,31 @@ server.use(express.static(path.join(__dirname, './www')));
 
 
 // ----temp login logout routes----
-// server.post('/login',
-//     passport.authenticate('local', {
-//         successRedirect: '/welcome.html',
-//         failureRedirect: '/login.html'
-//     })
-// )
-
 server.post('/login',
-    passport.authenticate('local',{
-        successRedirect: (req, res) => res.send('ok')
-    }) 
+    passport.authenticate('local'),
+    //  {
+    //     successRedirect: res.redirect('/shopping-main'),
+    //     failureRedirect: res.redirect('/login')
+    // }
+    // function (req, res) { res.send('authinticated') }
+    function (req, res) { res.redirect('../shopping-main') }
+    // function (req, res) { res.writeHead(302, {location: '/shopping-main'}); res.end(); }
 )
 
+
 server.get('/logout', (req, res) => {
+    console.log('test');
+
     req.logout();
-    res.redirect('/login.html');
+    res.redirect('../login');
 })
-server.use('/', passportConfig.validatedUser);
+server.get('/isAuthenticated', passportConfig.validatedUser);
+server.use('/shopping', passportConfig.validatedUser);
 
 //----middlewares for specific routed requests----
-server.use('/products', productsRouter);
-server.use('/categories', passportConfig.validatedUser, categoryRouter);
-server.use('/users', userRouter);
+server.use('/shopping/products', productsRouter);
+server.use('/shopping/categories', categoryRouter);
+server.use('/shopping/users', userRouter);
 server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './www/index.html'));
 });
@@ -87,5 +89,5 @@ async.waterfall([
     if (err) {
         return console.log(err);
     }
-    return console.log(`Server up and running on port ${process.env.PORT} and connected to mongo DB`);
+    return console.log(`Server's up and running on port ${process.env.PORT} and connected to mongo DB`);
 });

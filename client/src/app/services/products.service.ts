@@ -3,7 +3,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Injectable()
 export class ProductsService {
-  private url = 'http://localhost:4500/products';
+  private url = 'http://localhost:4500/shopping/products';
   headers: Headers;
   options: RequestOptions;
 

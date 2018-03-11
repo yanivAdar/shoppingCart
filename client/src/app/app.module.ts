@@ -15,9 +15,12 @@ import { SearchComponent } from './search/search.component';
 import { CartComponent } from './products/cart/cart.component';
 import { CategoriesComponent } from './products/categories/categories.component';
 import { CategoriesHeaderComponent } from './products/categories/categories-header/categories-header.component';
-import { CategoriesService } from './services/categories.service';
+import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoriesService } from './services/categories.service';
 import { ProductsService } from './services/products.service';
+import { LoginService } from './services/login.service';
+import { AuthGuard } from './auth/auth-guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ProductsService } from './services/products.service';
     CartComponent,
     CategoriesComponent,
     CategoriesHeaderComponent,
-    AddProductListComponent
+    AddProductListComponent,
+    LoginComponent
   ],
   entryComponents: [AddProductListComponent],
   imports: [
@@ -42,7 +46,7 @@ import { ProductsService } from './services/products.service';
     ReactiveFormsModule,
 
   ],
-  providers: [CategoriesService, ProductsService],
+  providers: [CategoriesService, ProductsService, LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

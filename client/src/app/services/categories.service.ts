@@ -10,7 +10,7 @@ export class CategoriesService {
   categories;
   categoryId$$ = new ReplaySubject<any>(1);
 
-  private url = 'http://localhost:4500/categories/';
+  private url = 'http://localhost:4500/shopping/categories/';
   constructor(private http: Http) { }
 
   getCategories() {

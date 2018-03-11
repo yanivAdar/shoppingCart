@@ -85,10 +85,7 @@ export class AddProductListComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.productForm.value);
-  
     this.productService.addProductByCategory(this.productForm.value).subscribe(res=>{
-      console.log('the result of the adding is: ',res);
     this.categoriesService.categoryId$$.next(res._id);
     });
   }

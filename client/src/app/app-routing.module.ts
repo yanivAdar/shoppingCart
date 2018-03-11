@@ -4,12 +4,17 @@ import { ProductsComponent } from "./products/products.component";
 import { SearchComponent } from "./search/search.component";
 import { CategoriesComponent } from "./products/categories/categories.component";
 import { ProductListComponent } from "./products/product-list/product-list.component";
+import { LoginComponent } from "./login/login.component";
+import { AuthGuard } from "./auth/auth-guard";
 
 const appRoutes: Routes = [
-    { path: 'shopping-main', component: ProductsComponent, children: [
-        { path: ':category/products', component: ProductListComponent }
-    ] },
-    { path: 'search', component: SearchComponent }
+    { path: 'login', component: LoginComponent },
+    {
+        path: 'shopping-main', canActivate: [AuthGuard], component: ProductsComponent, children: [
+            { path: ':category/products',canActivate: [AuthGuard], component: ProductListComponent },
+            { path: 'search', component: SearchComponent }
+        ]
+    },
 ]
 
 @NgModule({
@@ -17,4 +22,4 @@ const appRoutes: Routes = [
     exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
