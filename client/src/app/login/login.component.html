@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="col-md-4">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="name">User Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="username">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" formControlName="password" >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="sumbit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+                    <button type="button" class="btn btn-primery" (click)="onRegister()">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        Details about the store
+    </div>
+    <div class="col-md-4">
+        runnig images of products availble on the store
+    </div>
+</div>

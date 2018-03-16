@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Add Product To Cart</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                    <b>Product Name:</b> {{product.name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                    <b>Product Price:</b> {{product.price*amount.value}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form [formGroup]="addingProductToCartForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="number" id="amount" class="form-control" formControlName="amount" #amount min="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="sumbit" class="btn btn-success" (click)="onClose()" [disabled]="!addingProductToCartForm.valid">Save To Cart</button>
+                            <button type="button" class="btn btn-danger" (click)="onClose()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-form-field>
+</div>

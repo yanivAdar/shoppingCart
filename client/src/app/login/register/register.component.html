@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-6 col-offset-3">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <ng-container *ngIf="view === 'partOne'">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="id">Id</label>
+                        <input type="number" id="id" class="form-control" formControlName="idNumber">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <p class="pull-right" *ngIf="emailMessage">{{emailMessage}}</p>
+                        <input #email type="text" id="email" class="form-control"
+                        formControlName="email" (change)="validateEmail(email.value)">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" formControlName="password" [(ngModel)]="pass">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="confPassword">Confirm Password</label>
+                        <input type="password" id="confPassword" class="form-control" [(ngModel)]="confPass" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-primary" (click)="onNext()"
+                     [disabled]="confPass != pass || confPass == null || pass == null && emailMessage != 'email is taken'">Next</button>
+                </div>
+                <div class="col-md-7">
+                    <div>
+                        <p *ngIf="confPass != pass && confPass != null && pass != null">Confim password doesn't match password</p>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="view === 'partTwo'">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" class="form-control" formControlName="city">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="street">Street</label>
+                        <input type="text" id="street" class="form-control" formControlName="street">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="name">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" formControlName="last">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" (click)="onBack()">Back</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Submit</button>
+                </div>
+            </ng-container>
+        </form>
+    </div>
+</div>
