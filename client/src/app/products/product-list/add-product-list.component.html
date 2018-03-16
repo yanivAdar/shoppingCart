@@ -3,7 +3,7 @@
   <mat-form-field>
     <div class="row">
       <div class="col-xs-12">
-        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="addingProductsForm" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="col-xs-6">
               <div class="form-group">
@@ -30,24 +30,23 @@
                 <input type="number" id="price" class="form-control" formControlName="price">
               </div>
             </div>
-          <!-- </div>
+            <!-- </div>
           <div class="row"> -->
             <div class="col-xs-6">
               <div class="form-group">
-                  <div *ngIf="current.name == 'General'">
-                    <label for="category">Category</label>
-                    <select formControlName="category" id="category" class="form-control">
-                      <option value="" disabled="true">Choose Category</option>
-                      <option *ngFor="let category of categories"
-                      [value]="category._id" >{{ category.name }}</option>
-                    </select>
+                <div *ngIf="current.name == 'General'">
+                  <label for="category">Category</label>
+                  <select formControlName="category" id="category" class="form-control">
+                    <option value="" disabled="true">Choose Category</option>
+                    <option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</option>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <button type="sumbit" class="btn btn-success" (click)="onNoClick()" [disabled]="!productForm.valid">Save</button>
+              <button type="sumbit" class="btn btn-success" (click)="onNoClick()" [disabled]="!addingProductsForm.valid">Save</button>
               <button type="button" class="btn btn-danger" (click)="onNoClick()">Cancel</button>
             </div>
           </div>

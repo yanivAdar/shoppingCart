@@ -16,11 +16,11 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
-      <li *ngFor="let product of products" class="list-group-item">
+      <li *ngFor="let item of cartItems" class="list-group-item">
         <ul class="list-group">
-          <li class="list-group-item">Name: {{product.name}}</li>
-          <li class="list-group-item">Quantity: {{product.amount}}</li>
-          <li class="list-group-item">Price: {{product.price}}</li>
+          <li class="list-group-item">Name: {{item.name}}</li>
+          <li class="list-group-item">Quantity: {{item.amount}}</li>
+          <li class="list-group-item">Price: {{item.price}}</li>
         </ul>
       </li>
     </ul>

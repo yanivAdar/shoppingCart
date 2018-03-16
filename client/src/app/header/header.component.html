@@ -7,16 +7,10 @@
           <ul class="nav navbar-nav">
               <li routerLinkActive="active"><a routerLink="/search">Search</a></li>
               <li routerLinkActive="active"><a routerLink="/shopping-main">Products</a></li>
-              <li routerLinkActive="active"><a (click)="onLogout()">Logout</a></li>
+              <li class="logoutBtn" routerLinkActive="active"><a (click)="onLogout()">Logout</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <!-- <li style="cursor: pointer" class="dropdown" appDropdown>
-                  <a class="dropdown-toggle" roll="button">Manage shopping <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a style="cursor: pointer">Save data</a></li>
-                      <li><a style="cursor: pointer">Fetch data</a></li>
-                  </ul>
-              </li> -->
+             <li>{{userEmail}}</li>
           </ul>
       </div>
   </div>

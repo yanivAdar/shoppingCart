@@ -9,7 +9,8 @@ const UserSchema = new Schema({
     password: String,
     city: String,
     street: String,
-    role: String
+    role: String,
+    cart: Object
 })
 
 const User = mongoose.model('User', UserSchema);

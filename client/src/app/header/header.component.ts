@@ -7,10 +7,12 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private loginService: LoginService) { }
-
+  userEmail;
   ngOnInit() {
+    this.loginService.loggedInUser.subscribe(user=>{
+      this.userEmail = user['email'];
+    })
   }
   onLogout(){
     this.loginService.logout();

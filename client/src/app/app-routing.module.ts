@@ -6,9 +6,11 @@ import { CategoriesComponent } from "./products/categories/categories.component"
 import { ProductListComponent } from "./products/product-list/product-list.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./auth/auth-guard";
+import { RegisterComponent } from "./login/register/register.component";
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     {
         path: 'shopping-main', canActivate: [AuthGuard], component: ProductsComponent, children: [
             { path: ':category/products',canActivate: [AuthGuard], component: ProductListComponent },

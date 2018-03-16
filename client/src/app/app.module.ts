@@ -9,18 +9,21 @@ import { MatDialogModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ProductsComponent } from './products/products.component';
-import { ProductListComponent, AddProductListComponent } from './products/product-list/product-list.component';
+import { ProductListComponent, AddProductListComponent, AddProductToCartComponent } from './products/product-list/product-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SearchComponent } from './search/search.component';
 import { CartComponent } from './products/cart/cart.component';
 import { CategoriesComponent } from './products/categories/categories.component';
 import { CategoriesHeaderComponent } from './products/categories/categories-header/categories-header.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CategoriesService } from './services/categories.service';
 import { ProductsService } from './services/products.service';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './auth/auth-guard';
+import { RegisterComponent } from './login/register/register.component';
+import { RegisterService } from './services/register.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,11 @@ import { AuthGuard } from './auth/auth-guard';
     CategoriesComponent,
     CategoriesHeaderComponent,
     AddProductListComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AddProductToCartComponent
   ],
-  entryComponents: [AddProductListComponent],
+  entryComponents: [AddProductListComponent, AddProductToCartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,9 +49,10 @@ import { AuthGuard } from './auth/auth-guard';
     BrowserAnimationsModule,
     MatDialogModule,
     ReactiveFormsModule,
+    FormsModule
 
   ],
-  providers: [CategoriesService, ProductsService, LoginService, AuthGuard],
+  providers: [CategoriesService, ProductsService, LoginService, AuthGuard, RegisterService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

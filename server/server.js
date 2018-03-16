@@ -11,7 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const passportConfig = require('./authenticate/passport-conf');
-
+const querystring = require('querystring');
 const defaultBehavior = require('./dal/defaultSettings');
 
 //----global variables----
@@ -52,31 +52,33 @@ server.use(express.static(path.join(__dirname, './www')));
 
 
 // ----temp login logout routes----
-server.post('/login',
-    passport.authenticate('local'),
-    //  {
-    //     successRedirect: res.redirect('/shopping-main'),
-    //     failureRedirect: res.redirect('/login')
-    // }
-    // function (req, res) { res.send('authinticated') }
-    function (req, res) { res.redirect('../shopping-main') }
-    // function (req, res) { res.writeHead(302, {location: '/shopping-main'}); res.end(); }
+server.post('/login', passport.authenticate('local'),
+    function (req, res) {
+        userDetails = {
+            'userId': req.user._id,
+            'name': req.user.name,
+            'email': req.user.email,
+            'role': req.user.role,
+            'cart': req.user.cart
+        }
+        res.json(userDetails);
+    }
 )
 
-
 server.get('/logout', (req, res) => {
-    console.log('test');
-
     req.logout();
     res.redirect('../login');
 })
+
 server.get('/isAuthenticated', passportConfig.validatedUser);
+server.post('/checkEmail', userRouter);
+
 server.use('/shopping', passportConfig.validatedUser);
 
 //----middlewares for specific routed requests----
 server.use('/shopping/products', productsRouter);
 server.use('/shopping/categories', categoryRouter);
-server.use('/shopping/users', userRouter);
+server.use('/users', userRouter);
 server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './www/index.html'));
 });
