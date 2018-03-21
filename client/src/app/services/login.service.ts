@@ -20,7 +20,7 @@ export class LoginService {
     }
     postLogin(data) {
         return this.http.post(this.url + 'login', data).map(res => {
-            document.cookie = JSON.stringify(res.json());
+            document.cookie = "userDetails="+JSON.stringify(res.json());
             this.router.navigate(['../shopping-main']);
             if(res.json().cart.length > 0){
                 this.cartService.cartItems = res.json().cart;

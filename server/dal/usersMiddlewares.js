@@ -7,14 +7,18 @@ const recivedData = (req, res, err, data, next) => {
 }
 
 const updateCart = (req, res, next) => {
-    console.log(req.body);
-    
-    User.findByIdAndUpdate({ _id: req.params.id }, { cart: req.body }, { new: true },
-    (err, data) => recivedData(req, res, err, data, next));
+    User.findByIdAndUpdate({ _id: req.params.id }, { $push: { "cart": req.body } }, { new: true },
+        (err, data) => recivedData(req, res, err, data.cart, next));
 }
 
-const getSingleUser = (req, res, next) => {
-    User.find({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data, next));
+const updateCartItem = (req, res, next) => {
+    User.update({ _id: req.params.id, "cart.name": { $eq: req.body.name } },
+        { $set: { "cart.$.price": req.body.price, "cart.$.amount": req.body.amount } },
+        (err, data) => recivedData(req, res, err, data.cart, next))
+}
+
+const getSingleUserCart = (req, res, next) => {
+    User.find({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data[0].cart, next));
 }
 const createUser = (req, res, next) => {
     const { name, last, email, idNumber, password, city, street } = req.body;
@@ -29,8 +33,9 @@ const checkEmail = (req, res) => {
     })
 }
 module.exports = {
-    getSingleUser,
+    getSingleUserCart,
     createUser,
     checkEmail,
-    updateCart
+    updateCart,
+    updateCartItem
 }

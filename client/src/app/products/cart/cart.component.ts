@@ -9,24 +9,29 @@ import { LoginService } from '../../services/login.service';
 })
 export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private loginService: LoginService) { }
-  cartItems = this.cartService.cartItems;
+  // cartItems = this.cartService.cartItems;
   userId;
+
   ngOnInit() {
     this.loginService.loggedInUser.subscribe(user => {
       this.userId = user['userId'];
+      this.cartService.getUserCart(this.userId);
     })
 
     this.cartService.addedProduct.subscribe(item => {
-      console.log(this.cartItems);
-      
-      for (let i of this.cartItems) {
+      for (let i of this.cartService.cartItems) {
         if (i.name === item.name) {
           i.price += item.price;
-          return i.amount += item.amount
+          i.amount += item.amount;
+          this.cartService.updateCartItem(this.userId, i);
+          return;
         }
       }
       this.cartService.cartItems.push(item);
-      this.cartService.saveCartToUser(this.userId);
+      this.cartService.saveItemToCart(this.userId, item);
     })
+  }
+  getCartItems() {
+    return this.cartService.cartItems;
   }
 }

@@ -307,12 +307,14 @@ var AuthGuard = (function () {
                     case 0: return [4 /*yield*/, this.loginService.isAuthenticated()];
                     case 1:
                         res = _a.sent();
-                        //token authentication needed
                         if (res['status'] == 401) {
+                            document.cookie = 'userDetails =; expires=' + Date.UTC(17, 0) + "; path=/;";
+                            // document['cookie'] = '';
                             this.router.navigate(['login']);
                             return [2 /*return*/, false];
                         }
-                        this.loginService.loggedInUser.next(JSON.parse(document.cookie.split(';')[1]));
+                        this.loginService.loggedInUser.next(JSON.parse(document.cookie.split(';')
+                            .find(function (el) { return el.includes('userDetails'); }).split('=')[1]));
                         return [2 /*return*/, true];
                 }
             });
@@ -464,7 +466,6 @@ var LoginComponent = (function () {
         this.isAuthenticated = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     LoginComponent.prototype.ngOnInit = function () {
-        delete document.cookie;
         document['cookie'] = '';
         this.inItLoginForm(registerdUsername, registerdUserPass);
         this.registerService.userLoginDetails.first().subscribe(function (user) {
@@ -642,7 +643,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of cartItems\" class=\"list-group-item\">\r\n        <ul class=\"list-group\">\r\n          <li class=\"list-group-item\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{item.amount}}</li>\r\n          <li class=\"list-group-item\">Price: {{item.price}}</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item\">\r\n        <ul class=\"list-group\">\r\n          <li class=\"list-group-item\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{item.amount}}</li>\r\n          <li class=\"list-group-item\">Price: {{item.price}}</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -670,25 +671,29 @@ var CartComponent = (function () {
     function CartComponent(cartService, loginService) {
         this.cartService = cartService;
         this.loginService = loginService;
-        this.cartItems = this.cartService.cartItems;
     }
     CartComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.loginService.loggedInUser.subscribe(function (user) {
             _this.userId = user['userId'];
+            _this.cartService.getUserCart(_this.userId);
         });
         this.cartService.addedProduct.subscribe(function (item) {
-            console.log(_this.cartItems);
-            for (var _i = 0, _a = _this.cartItems; _i < _a.length; _i++) {
+            for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
                 var i = _a[_i];
                 if (i.name === item.name) {
                     i.price += item.price;
-                    return i.amount += item.amount;
+                    i.amount += item.amount;
+                    _this.cartService.updateCartItem(_this.userId, i);
+                    return;
                 }
             }
             _this.cartService.cartItems.push(item);
-            _this.cartService.saveCartToUser(_this.userId);
+            _this.cartService.saveItemToCart(_this.userId, item);
         });
+    };
+    CartComponent.prototype.getCartItems = function () {
+        return this.cartService.cartItems;
     };
     return CartComponent;
 }());
@@ -1255,9 +1260,17 @@ var CartService = (function () {
         this.url = 'http://localhost:4500/users/cart/';
         this.addedProduct = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
-    CartService.prototype.saveCartToUser = function (userId) {
+    CartService.prototype.getUserCart = function (userId) {
         var _this = this;
-        this.http.put(this.url + userId, this.cartItems).toPromise().then(function (res) { return _this.cartItems = res.json().cart; });
+        this.http.get(this.url + userId).toPromise().then(function (res) {
+            _this.cartItems = res.json();
+        });
+    };
+    CartService.prototype.saveItemToCart = function (userId, item) {
+        this.http.put(this.url + userId, item).toPromise();
+    };
+    CartService.prototype.updateCartItem = function (userId, item) {
+        this.http.post(this.url + userId, item).toPromise();
     };
     return CartService;
 }());
@@ -1414,7 +1427,7 @@ var LoginService = (function () {
     LoginService.prototype.postLogin = function (data) {
         var _this = this;
         return this.http.post(this.url + 'login', data).map(function (res) {
-            document.cookie = JSON.stringify(res.json());
+            document.cookie = "userDetails=" + JSON.stringify(res.json());
             _this.router.navigate(['../shopping-main']);
             if (res.json().cart.length > 0) {
                 _this.cartService.cartItems = res.json().cart;

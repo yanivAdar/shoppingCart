@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
-      <li *ngFor="let item of cartItems" class="list-group-item">
+      <li *ngFor="let item of getCartItems()" class="list-group-item">
         <ul class="list-group">
           <li class="list-group-item">Name: {{item.name}}</li>
           <li class="list-group-item">Quantity: {{item.amount}}</li>

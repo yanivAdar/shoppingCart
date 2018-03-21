@@ -17,6 +17,8 @@ const appRoutes: Routes = [
             { path: 'search', component: SearchComponent }
         ]
     },
+    // { path: '', canActivate: [AuthGuard], component: ProductsComponent }
+    
 ]
 
 @NgModule({

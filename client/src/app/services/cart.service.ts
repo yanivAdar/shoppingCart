@@ -11,7 +11,18 @@ export class CartService {
     url = 'http://localhost:4500/users/cart/'
     addedProduct = new EventEmitter<Cart>();
 
-    saveCartToUser(userId) {
-        this.http.put(this.url + userId, this.cartItems).toPromise().then(res => this.cartItems = res.json().cart);
+    getUserCart(userId) {
+        this.http.get(this.url + userId).toPromise().then(res => {
+            this.cartItems = res.json();
+        });
     }
+
+    saveItemToCart(userId, item) {
+        this.http.put(this.url + userId, item).toPromise();
+    }
+    updateCartItem(userId, item) {
+        this.http.post(this.url + userId, item).toPromise();
+    }
+
 }
+

@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
     ngOnInit() {
-        delete document.cookie;
         document['cookie'] = '';
         this.inItLoginForm(registerdUsername, registerdUserPass);
         this.registerService.userLoginDetails.first().subscribe(user => {
@@ -29,14 +28,14 @@ export class LoginComponent implements OnInit {
             registerdUserPass = user.pass;
         })
     }
-
+    
     inItLoginForm(name,pass) {
         this.loginForm = new FormGroup({
             'username': new FormControl(name, Validators.required),
             'password': new FormControl(pass, Validators.required)
         })
     }
-
+    
     onSubmit() {
         this.loginService.postLogin(this.loginForm.value).subscribe(res => {
             this.router.navigate(['/shopping-main']);
