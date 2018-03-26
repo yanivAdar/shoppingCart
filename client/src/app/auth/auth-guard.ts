@@ -10,8 +10,7 @@ export class AuthGuard implements CanActivate {
   async canActivate() {
     const res = await this.loginService.isAuthenticated();
     if (res['status'] == 401) {
-      document.cookie = 'userDetails =; expires=' + Date.UTC(17, 0) + "; path=/;";
-      // document['cookie'] = '';
+      document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
       this.router.navigate(['login']);
       return false
     }

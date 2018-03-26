@@ -10,13 +10,15 @@ const updateCart = (req, res, next) => {
     User.findByIdAndUpdate({ _id: req.params.id }, { $push: { "cart": req.body } }, { new: true },
         (err, data) => recivedData(req, res, err, data.cart, next));
 }
-
 const updateCartItem = (req, res, next) => {
     User.update({ _id: req.params.id, "cart.name": { $eq: req.body.name } },
         { $set: { "cart.$.price": req.body.price, "cart.$.amount": req.body.amount } },
         (err, data) => recivedData(req, res, err, data.cart, next))
 }
-
+const deleteCartItem = (req, res, next) => {
+    User.update({ _id: req.params.id }, { $pull: { cart: { name: req.body.name } } },
+        (err, data) => recivedData(req, res, err, data.cart, next))
+}
 const getSingleUserCart = (req, res, next) => {
     User.find({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data[0].cart, next));
 }
@@ -37,5 +39,6 @@ module.exports = {
     createUser,
     checkEmail,
     updateCart,
-    updateCartItem
+    updateCartItem,
+    deleteCartItem
 }

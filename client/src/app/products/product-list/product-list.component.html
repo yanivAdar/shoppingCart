@@ -1,10 +1,15 @@
 <div class="row" *ngIf="currentCategory && currentCategory.productList">
   <div class="col-md-2" *ngFor="let product of currentCategory.productList">
-    <a class="list-group-item clearfix styleList" style="cursor:pointer" (click)="openAddItemToCart(product)">
+    <a class="list-group-item clearfix styleList" style="cursor:pointer" (click)="openAddItemToCart(product,false)">
       <p>name: {{product.name}}</p>
       <p>price: {{product.price}}</p>
       <div class="pull-right">
         <img src="{{product.imagePath}}" alt="{{product.name}}" class="img-responsive" style="max-height: 50px;">
+      </div>
+      <div *ngIf="loggedUser.role == 'admin'">
+        <button class="btn btn-success editBtnStyle" (click)="editItem($event,product)">
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
       </div>
     </a>
   </div>

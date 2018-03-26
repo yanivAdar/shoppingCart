@@ -16,12 +16,14 @@ export class CartService {
             this.cartItems = res.json();
         });
     }
-
     saveItemToCart(userId, item) {
         this.http.put(this.url + userId, item).toPromise();
     }
     updateCartItem(userId, item) {
         this.http.post(this.url + userId, item).toPromise();
+    }
+    deleteItemFromCart(userId, item) {
+        this.http.post(this.url + 'delete/' + userId, item).toPromise();
     }
 
 }

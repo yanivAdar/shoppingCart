@@ -52,7 +52,7 @@ import { CartService } from './services/cart.service';
     FormsModule
 
   ],
-  providers: [CategoriesService, ProductsService, LoginService, AuthGuard, RegisterService, CartService],
+  providers: [CategoriesService, ProductsService, LoginService, AuthGuard, RegisterService, CartService, ProductListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -230,7 +230,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_16__angular_forms__["j" /* ReactiveFormsModule */],
             __WEBPACK_IMPORTED_MODULE_16__angular_forms__["e" /* FormsModule */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_17__services_categories_service__["a" /* CategoriesService */], __WEBPACK_IMPORTED_MODULE_18__services_products_service__["a" /* ProductsService */], __WEBPACK_IMPORTED_MODULE_19__services_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_20__auth_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__services_register_service__["a" /* RegisterService */], __WEBPACK_IMPORTED_MODULE_23__services_cart_service__["a" /* CartService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_17__services_categories_service__["a" /* CategoriesService */], __WEBPACK_IMPORTED_MODULE_18__services_products_service__["a" /* ProductsService */], __WEBPACK_IMPORTED_MODULE_19__services_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_20__auth_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__services_register_service__["a" /* RegisterService */], __WEBPACK_IMPORTED_MODULE_23__services_cart_service__["a" /* CartService */], __WEBPACK_IMPORTED_MODULE_9__products_product_list_product_list_component__["c" /* ProductListComponent */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -308,8 +308,7 @@ var AuthGuard = (function () {
                     case 1:
                         res = _a.sent();
                         if (res['status'] == 401) {
-                            document.cookie = 'userDetails =; expires=' + Date.UTC(17, 0) + "; path=/;";
-                            // document['cookie'] = '';
+                            document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
                             this.router.navigate(['login']);
                             return [2 /*return*/, false];
                         }
@@ -466,7 +465,6 @@ var LoginComponent = (function () {
         this.isAuthenticated = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     LoginComponent.prototype.ngOnInit = function () {
-        document['cookie'] = '';
         this.inItLoginForm(registerdUsername, registerdUserPass);
         this.registerService.userLoginDetails.first().subscribe(function (user) {
             registerdUsername = user.name;
@@ -622,7 +620,14 @@ var _a, _b;
 
 /***/ }),
 
-/***/ "../../../../../src/app/products/cart/cart.component.css":
+/***/ "../../../../../src/app/products/cart/cart.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item\">\r\n        <ul class=\"list-group ulPosition\">\r\n          <div class=\"hoverToShow\" *ngIf=\"!hoverDelete\">\r\n            <button class=\"btn btn-danger btnStyle\" (click)=\"hoverDelete = true\">\r\n              <span class=\"glyphicon glyphicon-remove\"></span>\r\n            </button>\r\n            <button class=\"btn btn-success btnStyle\" (click)=\"editItem(item)\">\r\n              <span class=\"glyphicon glyphicon-edit\"></span>\r\n            </button>\r\n          </div>\r\n          <div class=\"hoverToShow\" *ngIf=\"hoverDelete\">\r\n            <p class=\"pStyle\">Are you sure you want to delete {{item.name}} from the cart?</p>\r\n            <div style=\"flex-direction:row-reverse\">\r\n              <button class=\"btn btn-danger btnStyle\" (click)=\"removeItemFromCart(item)\">\r\n                <span class=\"glyphicon glyphicon-trash\"></span>\r\n              </button>\r\n              <button class=\"btn btn-primary btnStyle\" (click)=\"hoverDelete = false\">\r\n                <span class=\"glyphicon glyphicon-circle-arrow-left\"></span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n          <li class=\"list-group-item\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{item.amount}}</li>\r\n          <li class=\"list-group-item\">Price: {{item.price*item.amount}}</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/products/cart/cart.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -630,20 +635,13 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".btnStyle {\n  position: relative;\n  margin: 4px;\n  box-shadow: 2px 2px 4px grey; }\n\n.hoverToShow {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  transition: opacity 0.2s ease;\n  -ms-flex-pack: center;\n      justify-content: center;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-direction: column;\n      flex-direction: column;\n  -ms-flex-align: end;\n      align-items: flex-end; }\n\n.hoverToShow:hover {\n  opacity: 1; }\n\n.ulPosition {\n  position: relative; }\n\n.pStyle {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.4);\n  text-align: center;\n  border-radius: 4px; }\n", ""]);
 
 // exports
 
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/products/cart/cart.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item\">\r\n        <ul class=\"list-group\">\r\n          <li class=\"list-group-item\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{item.amount}}</li>\r\n          <li class=\"list-group-item\">Price: {{item.price}}</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -655,6 +653,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_cart_service__ = __webpack_require__("../../../../../src/app/services/cart.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_login_service__ = __webpack_require__("../../../../../src/app/services/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__product_list_product_list_component__ = __webpack_require__("../../../../../src/app/products/product-list/product-list.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -667,13 +666,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CartComponent = (function () {
-    function CartComponent(cartService, loginService) {
+    function CartComponent(cartService, loginService, productListComponent) {
         this.cartService = cartService;
         this.loginService = loginService;
+        this.productListComponent = productListComponent;
     }
     CartComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.hoverDelete = false;
         this.loginService.loggedInUser.subscribe(function (user) {
             _this.userId = user['userId'];
             _this.cartService.getUserCart(_this.userId);
@@ -682,7 +684,6 @@ var CartComponent = (function () {
             for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
                 var i = _a[_i];
                 if (i.name === item.name) {
-                    i.price += item.price;
                     i.amount += item.amount;
                     _this.cartService.updateCartItem(_this.userId, i);
                     return;
@@ -695,18 +696,34 @@ var CartComponent = (function () {
     CartComponent.prototype.getCartItems = function () {
         return this.cartService.cartItems;
     };
+    CartComponent.prototype.removeItemFromCart = function (item) {
+        this.hoverDelete = false;
+        console.log('name remove func: ', item);
+        this.cartService.deleteItemFromCart(this.userId, item);
+        this.cartService.cartItems = this.cartService.cartItems.filter(function (cartItem) {
+            return cartItem.name !== item.name;
+        });
+        console.log(this.cartService.cartItems);
+        // for(let i in this.cartService.cartItems){
+        //   this.cartService.cartItems.splice[i].name === item.name ? this.cartService.cartItems.splice(i,1)
+        // }
+    };
+    CartComponent.prototype.editItem = function (item) {
+        this.productListComponent.openAddItemToCart(item, true);
+        console.log('edit: ', item);
+    };
     return CartComponent;
 }());
 CartComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-cart',
         template: __webpack_require__("../../../../../src/app/products/cart/cart.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/products/cart/cart.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/products/cart/cart.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_cart_service__["a" /* CartService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_cart_service__["a" /* CartService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_login_service__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login_service__["a" /* LoginService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_cart_service__["a" /* CartService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_cart_service__["a" /* CartService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_login_service__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login_service__["a" /* LoginService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__product_list_product_list_component__["c" /* ProductListComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__product_list_product_list_component__["c" /* ProductListComponent */]) === "function" && _c || Object])
 ], CartComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=cart.component.js.map
 
 /***/ }),
@@ -872,7 +889,7 @@ CategoriesComponent = __decorate([
 /***/ "../../../../../src/app/products/product-list/add-product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"addingProductsForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\r\n              </div>\r\n            </div>\r\n            <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"current.name == 'General'\">\r\n                  <label for=\"category\">Category</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\" [value]=\"category._id\">{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onNoClick()\" [disabled]=\"!addingProductsForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"addingProductsForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"text\" id=\"imagePath\" class=\"form-control\" formControlName=\"imagePath\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\">\r\n              </div>\r\n            </div>\r\n            <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"current.name == 'General'\">\r\n                  <label for=\"category\">Category</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\" [value]=\"category._id\">{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!addingProductsForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
 
 /***/ }),
 
@@ -891,7 +908,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "::ng-deep .mat-dialog-container{\r\n    margin-top: -250px;    \r\n}\r\n\r\n.imgStyle{\r\n    max-height: 180px;\r\n}", ""]);
+exports.push([module.i, "::ng-deep .mat-dialog-container{\r\n    margin-top: -250px;    \r\n}\r\n\r\n.imgStyle{\r\n    max-height: 180px;\r\n}\r\n.editBtnStyle{\r\n    opacity: 0;\r\n    margin: 5px;\r\n    height: 20%;\r\n    width: 18%;\r\n    bottom: 0;\r\n    left: 0;\r\n    padding: 2px;\r\n    position: absolute;\r\n    transition: opacity 0.2s ease;    \r\n}\r\n.styleList:hover .editBtnStyle{\r\n    opacity: 1;\r\n}", ""]);
 
 // exports
 
@@ -904,7 +921,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/products/product-list/product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\r\n  <div class=\"col-md-2\" *ngFor=\"let product of currentCategory.productList\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\" (click)=\"openAddItemToCart(product)\">\r\n      <p>name: {{product.name}}</p>\r\n      <p>price: {{product.price}}</p>\r\n      <div class=\"pull-right\">\r\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\r\n      </div>\r\n    </a>\r\n  </div>\r\n  <div class=\"col-md-2\" *ngIf=\"loggedUser.role == 'admin'\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer; height: 132px\" mat-raised-button (click)=\"openDialog()\">\r\n      <h2>Add <span style=\"font-size: 20px\" class=\"glyphicon glyphicon-plus\"></span> Product</h2>\r\n    </a>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\" *ngIf=\"currentCategory && currentCategory.productList\">\r\n  <div class=\"col-md-2\" *ngFor=\"let product of currentCategory.productList\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer\" (click)=\"openAddItemToCart(product,false)\">\r\n      <p>name: {{product.name}}</p>\r\n      <p>price: {{product.price}}</p>\r\n      <div class=\"pull-right\">\r\n        <img src=\"{{product.imagePath}}\" alt=\"{{product.name}}\" class=\"img-responsive\" style=\"max-height: 50px;\">\r\n      </div>\r\n      <div *ngIf=\"loggedUser.role == 'admin'\">\r\n        <button class=\"btn btn-success editBtnStyle\" (click)=\"editItem($event,product)\">\r\n          <span class=\"glyphicon glyphicon-edit\"></span>\r\n        </button>\r\n      </div>\r\n    </a>\r\n  </div>\r\n  <div class=\"col-md-2\" *ngIf=\"loggedUser.role == 'admin'\">\r\n    <a class=\"list-group-item clearfix styleList\" style=\"cursor:pointer; height: 132px\" mat-raised-button (click)=\"openDialog()\">\r\n      <h2>Add <span style=\"font-size: 20px\" class=\"glyphicon glyphicon-plus\"></span> Product</h2>\r\n    </a>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -971,7 +988,6 @@ var ProductListComponent = (function () {
         this.loginService.loggedInUser.subscribe(function (user) {
             _this.loggedUser = user;
         });
-        // this.loggedUser = JSON.parse(document.cookie.split(';')[1]);
         this.categoriesService.categoryId$$
             .takeUntil(this.ngUnsubscribe)
             .do(function (id) { _this.id = id; })
@@ -986,20 +1002,28 @@ var ProductListComponent = (function () {
             _this.categories = res;
         });
     };
-    ProductListComponent.prototype.openDialog = function () {
+    ProductListComponent.prototype.editItem = function (event, product) {
+        event.stopPropagation();
+        this.openDialog(product);
+        console.log('product: ', product);
+    };
+    ProductListComponent.prototype.openDialog = function (product) {
+        var _this = this;
         var dialogRef = this.dialog.open(AddProductListComponent, {
             data: {
+                product: product,
                 categories: this.categories,
                 currentCategory: this.currentCategory
             }
         });
-        dialogRef.afterClosed().subscribe(function (result) { });
+        dialogRef.afterClosed().subscribe(function (result) { return result ? _this.currentCategory = result : null; });
     };
-    ProductListComponent.prototype.openAddItemToCart = function (product) {
+    ProductListComponent.prototype.openAddItemToCart = function (product, isEditMode) {
         var addToCartDialogRef = this.dialog.open(AddProductToCartComponent, {
             data: {
                 product: product,
-                user: this.loggedUser
+                user: this.loggedUser,
+                isEditMode: isEditMode
             }
         });
         addToCartDialogRef.afterClosed().subscribe(function (result) { });
@@ -1032,23 +1056,45 @@ var AddProductListComponent = (function () {
         this.categoriesService = categoriesService;
         this.categories = this.data.categories;
         this.current = this.data.currentCategory;
+        this.product = this.data.product;
     }
     AddProductListComponent.prototype.ngOnInit = function () {
+        this.product ? this.editMode = true : this.editMode = false;
         this.initAddingProductsForm();
     };
     AddProductListComponent.prototype.initAddingProductsForm = function () {
-        this.addingProductsForm = new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["c" /* FormGroup */]({
-            'name': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
-            'imagePath': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
-            'price': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
-            'category': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.current._id)
-        });
+        if (this.product) {
+            this.addingProductsForm = new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["c" /* FormGroup */]({
+                'name': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.product.name, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'imagePath': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.product.imagePath, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'price': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.product.price, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'category': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.current._id)
+            });
+        }
+        else {
+            this.addingProductsForm = new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["c" /* FormGroup */]({
+                'name': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'imagePath': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'price': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](null, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required),
+                'category': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.current._id)
+            });
+        }
     };
     AddProductListComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.productService.addProductByCategory(this.addingProductsForm.value).subscribe(function (res) {
-            _this.categoriesService.categoryId$$.next(res._id);
-        });
+        if (this.editMode) {
+            this.addingProductsForm.value['productId'] = this.product._id;
+            this.productService.updateProductByCategory(this.addingProductsForm.value).subscribe(function (res) {
+                _this.categoriesService.getCategory(_this.addingProductsForm.controls.category.value).subscribe(function (res) {
+                    _this.dialogRef.close(res[0]);
+                });
+            });
+        }
+        else {
+            this.productService.addProductByCategory(this.addingProductsForm.value).subscribe(function (res) {
+                _this.categoriesService.categoryId$$.next(res._id);
+            });
+        }
     };
     AddProductListComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
@@ -1066,27 +1112,41 @@ AddProductListComponent = __decorate([
 ], AddProductListComponent);
 
 //----------Add Product To Cart Component-----------
+var user;
 var AddProductToCartComponent = (function () {
-    function AddProductToCartComponent(cartService, productService, dialogRef, data, categoriesService) {
+    function AddProductToCartComponent(loginService, cartService, productService, dialogRef, data, categoriesService) {
+        this.loginService = loginService;
         this.cartService = cartService;
         this.productService = productService;
         this.dialogRef = dialogRef;
         this.data = data;
         this.categoriesService = categoriesService;
         this.product = this.data.product;
-        this.user = this.data.user;
+        this.isEditMode = this.data.isEditMode;
     }
     AddProductToCartComponent.prototype.ngOnInit = function () {
         this.initAddingProductToCartForm();
     };
     AddProductToCartComponent.prototype.initAddingProductToCartForm = function () {
+        console.log(this.product.amount);
         this.addingProductToCartForm = new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["c" /* FormGroup */]({
-            'amount': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](1, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required)
+            'amount': new __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* FormControl */](this.product.amount ? this.product.amount : 1, __WEBPACK_IMPORTED_MODULE_8__angular_forms__["k" /* Validators */].required)
         });
     };
     AddProductToCartComponent.prototype.onSubmit = function () {
-        var newCartItem = new __WEBPACK_IMPORTED_MODULE_10__cart_cart_model__["a" /* Cart */](this.product.name, this.product.price * this.addingProductToCartForm.controls.amount.value, this.addingProductToCartForm.controls.amount.value);
-        this.cartService.addedProduct.emit(newCartItem);
+        var _this = this;
+        var newCartItem = new __WEBPACK_IMPORTED_MODULE_10__cart_cart_model__["a" /* Cart */](this.product.name, this.product.price, this.addingProductToCartForm.controls.amount.value);
+        this.loginService.loggedInUser.subscribe(function (user) {
+            console.log(user);
+            if (_this.isEditMode) {
+                for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
+                    var i = _a[_i];
+                    i.name === newCartItem.name ? i.amount = newCartItem.amount : null;
+                }
+                return _this.cartService.updateCartItem(user['userId'], newCartItem);
+            }
+            return _this.cartService.addedProduct.emit(newCartItem);
+        });
     };
     AddProductToCartComponent.prototype.onClose = function () {
         this.dialogRef.close();
@@ -1099,11 +1159,11 @@ AddProductToCartComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/products/product-list/add-product-to-cart.component.html"),
         styles: [__webpack_require__("../../../../../src/app/products/product-list/product-list.component.css")]
     }),
-    __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_12__services_cart_service__["a" /* CartService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__services_cart_service__["a" /* CartService */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */]) === "function" && _l || Object, Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */]) === "function" && _m || Object])
+    __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MAT_DIALOG_DATA */])),
+    __metadata("design:paramtypes", [typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_11__services_login_service__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__services_login_service__["a" /* LoginService */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_12__services_cart_service__["a" /* CartService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__services_cart_service__["a" /* CartService */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_products_service__["a" /* ProductsService */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialogRef */]) === "function" && _m || Object, Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_categories_service__["a" /* CategoriesService */]) === "function" && _o || Object])
 ], AddProductToCartComponent);
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 //# sourceMappingURL=product-list.component.js.map
 
 /***/ }),
@@ -1272,6 +1332,9 @@ var CartService = (function () {
     CartService.prototype.updateCartItem = function (userId, item) {
         this.http.post(this.url + userId, item).toPromise();
     };
+    CartService.prototype.deleteItemFromCart = function (userId, item) {
+        this.http.post(this.url + 'delete/' + userId, item).toPromise();
+    };
     return CartService;
 }());
 CartService = __decorate([
@@ -1435,9 +1498,8 @@ var LoginService = (function () {
         });
     };
     LoginService.prototype.logout = function () {
+        document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
         this.http.get(this.url + 'logout').toPromise().then(function (res) {
-            delete document.cookie;
-            document['cookie'] = '';
             window.location.href = res.url;
         });
     };
@@ -1483,6 +1545,9 @@ var ProductsService = (function () {
     }
     ProductsService.prototype.addProductByCategory = function (data) {
         return this.http.put(this.url, JSON.stringify(data), this.options).map(function (res) { return res.json(); });
+    };
+    ProductsService.prototype.updateProductByCategory = function (data) {
+        return this.http.patch(this.url + '/' + data.productId, data).map(function (res) { return res.json(); });
     };
     return ProductsService;
 }());

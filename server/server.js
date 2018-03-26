@@ -39,7 +39,7 @@ server.use(session({
     name: 'user_shopping_cookie',
     cookie: {
         httpOnly: false,
-        maxAge: 1000 * 60 * 5
+        maxAge: 1000 * 60 * 60
     },
     store: new MongoStore({
         url: process.env.CONNECTION_STRING

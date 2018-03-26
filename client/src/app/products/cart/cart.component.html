@@ -17,10 +17,29 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li *ngFor="let item of getCartItems()" class="list-group-item">
-        <ul class="list-group">
+        <ul class="list-group ulPosition">
+          <div class="hoverToShow" *ngIf="!hoverDelete">
+            <button class="btn btn-danger btnStyle" (click)="hoverDelete = true">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button class="btn btn-success btnStyle" (click)="editItem(item)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </div>
+          <div class="hoverToShow" *ngIf="hoverDelete">
+            <p class="pStyle">Are you sure you want to delete {{item.name}} from the cart?</p>
+            <div style="flex-direction:row-reverse">
+              <button class="btn btn-danger btnStyle" (click)="removeItemFromCart(item)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+              <button class="btn btn-primary btnStyle" (click)="hoverDelete = false">
+                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+              </button>
+            </div>
+          </div>
           <li class="list-group-item">Name: {{item.name}}</li>
           <li class="list-group-item">Quantity: {{item.amount}}</li>
-          <li class="list-group-item">Price: {{item.price}}</li>
+          <li class="list-group-item">Price: {{item.price*item.amount}}</li>
         </ul>
       </li>
     </ul>

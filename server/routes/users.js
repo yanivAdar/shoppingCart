@@ -10,6 +10,8 @@ router.put('/cart/:id', usersMiddelwares.updateCart, (req, res) => res.json(req.
 
 router.post('/cart/:id', usersMiddelwares.updateCartItem, (req, res) => res.json(req.data))
 
+router.post('/cart/delete/:id', usersMiddelwares.deleteCartItem, (req, res) => res.json(req.data))
+
 router.post('/checkEmail', usersMiddelwares.checkEmail);
 
 

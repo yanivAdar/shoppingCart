@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
     ngOnInit() {
-        document['cookie'] = '';
         this.inItLoginForm(registerdUsername, registerdUserPass);
         this.registerService.userLoginDetails.first().subscribe(user => {
             registerdUsername = user.name;
