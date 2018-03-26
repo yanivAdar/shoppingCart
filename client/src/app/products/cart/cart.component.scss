@@ -1,0 +1,32 @@
+
+.btnStyle{
+    position: relative;
+    margin: 4px;
+    box-shadow: 2px 2px 4px grey;
+}
+.hoverToShow {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(black,0.3);
+    border-radius: 4px;
+    transition: opacity 0.2s ease;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.hoverToShow:hover {
+    opacity: 1;
+}
+.ulPosition{
+    position: relative;
+}
+.pStyle{
+    color: white;
+    background-color: rgba(black,0.4);
+    text-align: center;
+    border-radius: 4px;
+}
