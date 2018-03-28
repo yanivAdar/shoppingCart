@@ -15,7 +15,7 @@ export class ProductsService {
     this.options = new RequestOptions({ headers: this.headers });
   }
   addProductByCategory(data) {
-    return this.http.put(this.url, JSON.stringify(data), this.options).map(res => res.json())
+    return this.http.put(this.url, data, this.options).map(res => res.json());
   }
   updateProductByCategory(data) {
     return this.http.patch(this.url + '/' + data.productId, data).map(res => res.json());

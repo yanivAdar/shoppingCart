@@ -61,7 +61,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => result ? this.currentCategory = result: null);
+    dialogRef.afterClosed().subscribe(result => result ? this.currentCategory = result : null);
   }
 
   openAddItemToCart(product, isEditMode) {
@@ -96,6 +96,7 @@ export class AddProductListComponent implements OnInit {
   current = this.data.currentCategory;
   product = this.data.product;
   editMode;
+  errorMsg;
 
   constructor(private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
@@ -132,7 +133,10 @@ export class AddProductListComponent implements OnInit {
     } else {
       this.productService.addProductByCategory(this.addingProductsForm.value).subscribe(res => {
         this.categoriesService.categoryId$$.next(res._id);
-      });
+        this.dialogRef.close();
+      },
+        err => this.errorMsg = JSON.parse(err._body).errorMassage
+      );
     }
   }
   onNoClick(): void {
