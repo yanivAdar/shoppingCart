@@ -9,9 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 })
 export class ProductsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
-
+  toggleClick;
   ngOnInit() {
-    
+    this.toggleClick = true;
   }
 
 }

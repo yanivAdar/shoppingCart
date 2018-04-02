@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
 import { Subject } from 'rxjs/Subject';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
@@ -47,8 +48,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   editItem(event, product) {
     event.stopPropagation();
     this.openDialog(product);
-    console.log('product: ', product);
-
   }
 
   openDialog(product): void {
@@ -98,7 +97,7 @@ export class AddProductListComponent implements OnInit {
   editMode;
   errorMsg;
 
-  constructor(private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
+  constructor(private domSanitizer: DomSanitizer, private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
     this.product ? this.editMode = true : this.editMode = false;
@@ -120,6 +119,26 @@ export class AddProductListComponent implements OnInit {
         'price': new FormControl(null, Validators.required),
         'category': new FormControl(this.current._id)
       });
+    }
+  }
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.addingProductsForm.controls.imagePath.setValue(this.domSanitizer.bypassSecurityTrustUrl(reader.result)['changingThisBreaksApplicationSecurity'])
+        console.log(this.addingProductsForm.controls.imagePath.value);
+        
+        // this.addingProductsForm.get('imagePath').setValue(
+          // {
+          // filename: file.name,
+          // filetype: file.type,
+          // value: reader.result.split(',')[1]
+          // reader.result.split(',')[1]
+        // }
+      // )
+      };
     }
   }
   onSubmit() {
@@ -163,8 +182,6 @@ export class AddProductToCartComponent implements OnInit {
     this.initAddingProductToCartForm();
   }
   initAddingProductToCartForm() {
-    console.log(this.product.amount);
-
     this.addingProductToCartForm = new FormGroup({
       'amount': new FormControl(this.product.amount ? this.product.amount : 1, Validators.required)
     });

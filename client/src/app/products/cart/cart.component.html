@@ -38,10 +38,18 @@
             </div>
           </div>
           <li class="list-group-item">Name: {{item.name}}</li>
-          <li class="list-group-item">Quantity: {{item.amount}}</li>
-          <li class="list-group-item">Price: {{item.price*item.amount}}</li>
+          <li class="list-group-item">Quantity: {{item.amount}} * {{item.price}}$</li>
+          <li class="list-group-item">Price: {{item.price*item.amount}}$</li>
         </ul>
       </li>
     </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h4>
+      Total: {{totalPrice}}$
+    </h4>
+    <button class="btn btn-primary pull-right" (click)="orderCart()">Order</button>
   </div>
 </div>

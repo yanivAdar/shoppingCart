@@ -22,6 +22,9 @@ const deleteCartItem = (req, res, next) => {
 const getSingleUserCart = (req, res, next) => {
     User.find({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data[0].cart, next));
 }
+const getSingleUser = (req, res, next) => {
+    User.find({ _id: req.params.id }, (err, data) => recivedData(req, res, err, data[0], next));
+}
 const createUser = (req, res, next) => {
     const { name, last, email, idNumber, password, city, street } = req.body;
     const newUser = new User({ name, last, email, idNumber, password, city, street, role: 'customer' });
@@ -40,5 +43,6 @@ module.exports = {
     checkEmail,
     updateCart,
     updateCartItem,
-    deleteCartItem
+    deleteCartItem,
+    getSingleUser
 }

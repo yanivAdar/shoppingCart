@@ -47,14 +47,17 @@ export class RegisterComponent implements OnInit {
             this.emailMessage = 'Invalid email';
         } else {
             this.registerService.checkEmail({ 'email': email }).subscribe(res => {
-                this.emailMessage = res;
+                if(res == 'Email is taken'){
+                    this.emailMessage = res
+                    return this.registerForm.controls['email'].setErrors({'incorrect': true});
+                }
+                this.emailMessage = '';
+                this.registerForm.controls['email'].setErrors(null);
             })
         }
     }
     onSubmit() {
         this.registerService.postRegister(this.registerForm.value).subscribe(res => {
-            console.log('name: ', res.name, 'pass: ', res.password, 'res: ', res);
-
             this.registerService.userLoginDetails.next({ name: res.name, pass: res.password });
             this.router.navigate(['/login']);
         })

@@ -8,6 +8,7 @@ export class CartService {
     constructor(private http: Http) { }
     cartItems = [];
     userId;
+    totalPrice = 0;
     url = 'http://localhost:4500/users/cart/'
     addedProduct = new EventEmitter<Cart>();
 

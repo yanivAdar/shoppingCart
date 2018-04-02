@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
     @Output() isAuthenticated = new EventEmitter<boolean>();
     loginForm: FormGroup;
+    errorMessage;
 
     ngOnInit() {
         this.inItLoginForm(registerdUsername, registerdUserPass);
@@ -26,20 +27,20 @@ export class LoginComponent implements OnInit {
             registerdUsername = user.name;
             registerdUserPass = user.pass;
         })
+        this.loginService.errorMessage.subscribe(msg =>{ 
+            this.errorMessage = msg
+        });
     }
-    
-    inItLoginForm(name,pass) {
+
+    inItLoginForm(name, pass) {
         this.loginForm = new FormGroup({
             'username': new FormControl(name, Validators.required),
             'password': new FormControl(pass, Validators.required)
         })
     }
-    
-    onSubmit() {
-        this.loginService.postLogin(this.loginForm.value).subscribe(res => {
-            this.router.navigate(['/shopping-main']);
 
-        })
+    onSubmit() {
+        this.loginService.postLogin(this.loginForm.value);
     }
     onRegister() {
         this.router.navigate(['/register']);

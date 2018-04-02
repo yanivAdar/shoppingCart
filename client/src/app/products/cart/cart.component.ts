@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { LoginService } from '../../services/login.service';
 import { ProductListComponent } from '../product-list/product-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,11 +10,11 @@ import { ProductListComponent } from '../product-list/product-list.component';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  constructor(private cartService: CartService, private loginService: LoginService, private productListComponent: ProductListComponent) { }
-  // cartItems = this.cartService.cartItems;
+  constructor(private router: Router, private cartService: CartService, private loginService: LoginService, private productListComponent: ProductListComponent) { }
   userId;
   hoverDelete;
-
+  totalPrice: number;
+  
   ngOnInit() {
     this.hoverDelete = false;
     this.loginService.loggedInUser.subscribe(user => {
@@ -33,26 +34,29 @@ export class CartComponent implements OnInit {
       this.cartService.saveItemToCart(this.userId, item);
     })
   }
+
+  getTotalPrice() {
+    this.totalPrice = 0;
+    this.cartService.cartItems.map(item => {
+      this.totalPrice += item.price * item.amount;
+    })
+  }
   getCartItems() {
+    this.getTotalPrice();
     return this.cartService.cartItems;
   }
 
-  removeItemFromCart(item){
+  removeItemFromCart(item) {
     this.hoverDelete = false;
-    console.log('name remove func: ',item);
-    
-    this.cartService.deleteItemFromCart(this.userId,item);
-    this.cartService.cartItems = this.cartService.cartItems.filter((cartItem)=>{
+    this.cartService.deleteItemFromCart(this.userId, item);
+    this.cartService.cartItems = this.cartService.cartItems.filter((cartItem) => {
       return cartItem.name !== item.name;
     })
-    console.log(this.cartService.cartItems);
-    
-    // for(let i in this.cartService.cartItems){
-    //   this.cartService.cartItems.splice[i].name === item.name ? this.cartService.cartItems.splice(i,1)
-    // }
   }
-  editItem(item){
+  editItem(item) {
     this.productListComponent.openAddItemToCart(item, true);
-    console.log('edit: ', item);
+  }
+  orderCart(){
+    this.router.navigate(['/order']);
   }
 }

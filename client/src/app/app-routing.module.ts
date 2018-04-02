@@ -7,6 +7,7 @@ import { ProductListComponent } from "./products/product-list/product-list.compo
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./auth/auth-guard";
 import { RegisterComponent } from "./login/register/register.component";
+import { OrderComponent } from "./order/order.component";
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
             { path: 'search', component: SearchComponent }
         ]
     },
+    { path: 'order', canActivate: [AuthGuard], component: OrderComponent }
     // { path: '', canActivate: [AuthGuard], component: ProductsComponent }
     
 ]

@@ -24,6 +24,7 @@ import { AuthGuard } from './auth/auth-guard';
 import { RegisterComponent } from './login/register/register.component';
 import { RegisterService } from './services/register.service';
 import { CartService } from './services/cart.service';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CartService } from './services/cart.service';
     AddProductListComponent,
     LoginComponent,
     RegisterComponent,
-    AddProductToCartComponent
+    AddProductToCartComponent,
+    OrderComponent
   ],
   entryComponents: [AddProductListComponent, AddProductToCartComponent],
   imports: [

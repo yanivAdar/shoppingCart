@@ -7,8 +7,11 @@
   <div class="contentPageStyle">
     <div class="headerPosition col-md-12">
       <div class="navigation-container">
-        <button type="button" class="btn btn-default side-btn" mat-button (click)="drawer.toggle()">
-          <span class="glyphicon glyphicon-menu-right"></span> Cart</button>
+        <button type="button" class="btn btn-default side-btn" mat-button 
+        (click)="drawer.toggle(); toggleClick = !toggleClick">
+          <span [ngClass]="toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'"></span>
+          Cart
+        </button>
         <app-categories class="categories"></app-categories>
       </div>
 
