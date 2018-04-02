@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-6">
+    <div>
+      <h4 class="titleStyle">My Cart</h4>
+      <h4 class="pull-right clickble" (click)="navigateBack()">Go Back Shopping</h4>
+    </div>
+    <hr style="margin-top:0;" />
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems; let i = index">
+          <th scope="row">{{i}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5>
+      <b>Total: {{totalSum}}$</b>
+    </h5>
+  </div>
+  <div class="col-md-6">
+    <h4>Order</h4>
+    <hr style="margin-top:0;" />
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" class="form-control" formControlName="city">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="street">Street</label>
+                    <input type="text" id="street" class="form-control" formControlName="street">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="shipping-date">Shipping Date</label>
+                    <input type="date" id="shipping-date" class="form-control" formControlName="date">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="sumbit" class="btn btn-success" [disabled]="!orderForm.valid">Order</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
