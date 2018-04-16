@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../../services/categories.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-categories-header',
@@ -11,7 +9,7 @@ import { Subject } from 'rxjs/Subject';
 export class CategoriesHeaderComponent implements OnInit {
   categories = [];
   id = '';
-  constructor(private categoriesService: CategoriesService, private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit() {
     this.categoriesService.getCategories().subscribe(

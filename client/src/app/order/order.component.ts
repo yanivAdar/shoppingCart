@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit {
     this.initOrderForm();
     if (this.cartService.cartItems.length != 0) {
       this.cartItems = this.cartService.cartItems;
-      this.cartService.cartItems.map(item => {
+      this.cartService.cartItems.forEach(item => {
         this.totalSum += item.price * item.amount;
       })
       this.loginService.loggedInUser.subscribe(user => {

@@ -553,7 +553,7 @@ module.exports = ".clickble{\r\n    cursor: pointer;\r\n    display: inline;\r\n
 /***/ "./src/app/order/order.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-6\">\n    <div>\n      <h4 class=\"titleStyle\">My Cart</h4>\n      <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\n    </div>\n    <hr style=\"margin-top:0;\" />\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th scope=\"col\">#</th>\n          <th scope=\"col\">Item Name</th>\n          <th scope=\"col\">Amount</th>\n          <th scope=\"col\">Price</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of cartItems; let i = index\">\n          <th scope=\"row\">{{i}}</th>\n          <td>{{item.name}}</td>\n          <td>{{item.amount}}</td>\n          <td>{{item.price}}</td>\n        </tr>\n      </tbody>\n    </table>\n    <h5>\n      <b>Total: {{totalSum}}$</b>\n    </h5>\n  </div>\n  <div class=\"col-md-6\">\n    <h4>Order</h4>\n    <hr style=\"margin-top:0;\" />\n    <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"form-group\">\n                    <label for=\"city\">City</label>\n                    <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"form-group\">\n                    <label for=\"street\">Street</label>\n                    <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"form-group\">\n                    <label for=\"shipping-date\">Shipping Date</label>\n                    <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\n            </div>\n        </div>\n    </form>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n    <div>\r\n      <h4 class=\"titleStyle\">My Cart</h4>\r\n      <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\r\n    </div>\r\n    <hr style=\"margin-top:0;\" />\r\n    <table class=\"table\">\r\n      <thead>\r\n        <tr>\r\n          <th scope=\"col\">#</th>\r\n          <th scope=\"col\">Item Name</th>\r\n          <th scope=\"col\">Amount</th>\r\n          <th scope=\"col\">Price</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let item of cartItems; let i = index\">\r\n          <th scope=\"row\">{{i}}</th>\r\n          <td>{{item.name}}</td>\r\n          <td>{{item.amount}}</td>\r\n          <td>{{item.price}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <h5>\r\n      <b>Total: {{totalSum}}$</b>\r\n    </h5>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <h4>Order</h4>\r\n    <hr style=\"margin-top:0;\" />\r\n    <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"city\">City</label>\r\n                    <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"street\">Street</label>\r\n                    <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"shipping-date\">Shipping Date</label>\r\n                    <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -589,7 +589,7 @@ var OrderComponent = (function () {
         this.initOrderForm();
         if (this.cartService.cartItems.length != 0) {
             this.cartItems = this.cartService.cartItems;
-            this.cartService.cartItems.map(function (item) {
+            this.cartService.cartItems.forEach(function (item) {
                 _this.totalSum += item.price * item.amount;
             });
             this.loginService.loggedInUser.subscribe(function (user) {
@@ -663,12 +663,14 @@ var cart_service_1 = __webpack_require__("./src/app/services/cart.service.ts");
 var login_service_1 = __webpack_require__("./src/app/services/login.service.ts");
 var product_list_component_1 = __webpack_require__("./src/app/products/product-list/product-list.component.ts");
 var router_1 = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+var Subject_1 = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
 var CartComponent = (function () {
     function CartComponent(router, cartService, loginService, productListComponent) {
         this.router = router;
         this.cartService = cartService;
         this.loginService = loginService;
         this.productListComponent = productListComponent;
+        this.ngUnsubscribe = new Subject_1.Subject();
     }
     CartComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -677,7 +679,9 @@ var CartComponent = (function () {
             _this.userId = user['userId'];
             _this.cartService.getUserCart(_this.userId);
         });
-        this.cartService.addedProduct.subscribe(function (item) {
+        this.cartService.addedProduct
+            .takeUntil(this.ngUnsubscribe)
+            .subscribe(function (item) {
             for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
                 var i = _a[_i];
                 if (i.name === item.name) {
@@ -693,7 +697,7 @@ var CartComponent = (function () {
     CartComponent.prototype.getTotalPrice = function () {
         var _this = this;
         this.totalPrice = 0;
-        this.cartService.cartItems.map(function (item) {
+        this.cartService.cartItems.forEach(function (item) {
             _this.totalPrice += item.price * item.amount;
         });
     };
@@ -707,12 +711,18 @@ var CartComponent = (function () {
         this.cartService.cartItems = this.cartService.cartItems.filter(function (cartItem) {
             return cartItem.name !== item.name;
         });
+        console.log(this.cartService.cartItems);
     };
     CartComponent.prototype.editItem = function (item) {
         this.productListComponent.openAddItemToCart(item, true);
     };
     CartComponent.prototype.orderCart = function () {
+        this.ngOnDestroy();
         this.router.navigate(['/order']);
+    };
+    CartComponent.prototype.ngOnDestroy = function () {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     };
     return CartComponent;
 }());
@@ -780,12 +790,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 var categories_service_1 = __webpack_require__("./src/app/services/categories.service.ts");
-var router_1 = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 var CategoriesHeaderComponent = (function () {
-    function CategoriesHeaderComponent(categoriesService, activeRoute, router) {
+    function CategoriesHeaderComponent(categoriesService) {
         this.categoriesService = categoriesService;
-        this.activeRoute = activeRoute;
-        this.router = router;
         this.categories = [];
         this.id = '';
     }
@@ -807,10 +814,10 @@ CategoriesHeaderComponent = __decorate([
         template: __webpack_require__("./src/app/products/categories/categories-header/categories-header.component.html"),
         styles: [__webpack_require__("./src/app/products/categories/categories-header/categories-header.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof categories_service_1.CategoriesService !== "undefined" && categories_service_1.CategoriesService) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof categories_service_1.CategoriesService !== "undefined" && categories_service_1.CategoriesService) === "function" && _a || Object])
 ], CategoriesHeaderComponent);
 exports.CategoriesHeaderComponent = CategoriesHeaderComponent;
-var _a, _b, _c;
+var _a;
 //# sourceMappingURL=categories-header.component.js.map
 
 /***/ }),
@@ -1095,6 +1102,7 @@ var AddProductToCartComponent = (function () {
         this.categoriesService = categoriesService;
         this.product = this.data.product;
         this.isEditMode = this.data.isEditMode;
+        this.ngUnsubscribe = new Subject_1.Subject();
     }
     AddProductToCartComponent.prototype.ngOnInit = function () {
         this.initAddingProductToCartForm();
@@ -1107,7 +1115,9 @@ var AddProductToCartComponent = (function () {
     AddProductToCartComponent.prototype.onSubmit = function () {
         var _this = this;
         var newCartItem = new cart_model_1.Cart(this.product.name, this.product.price, this.addingProductToCartForm.controls.amount.value);
-        this.loginService.loggedInUser.subscribe(function (user) {
+        this.loginService.loggedInUser
+            .takeUntil(this.ngUnsubscribe)
+            .subscribe(function (user) {
             console.log(user);
             if (_this.isEditMode) {
                 for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
@@ -1121,6 +1131,10 @@ var AddProductToCartComponent = (function () {
     };
     AddProductToCartComponent.prototype.onClose = function () {
         this.dialogRef.close();
+    };
+    AddProductToCartComponent.prototype.ngOnDestroy = function () {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     };
     return AddProductToCartComponent;
 }());
@@ -1149,7 +1163,7 @@ module.exports = ".headerPosition{\r\n    float: right;\r\n}\r\n.cartPosition{\r
 /***/ "./src/app/products/products.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\r\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\r\n    <div class=\"col-md-12\">\r\n      <app-cart></app-cart>\r\n    </div>\r\n  </mat-drawer>\r\n  <div class=\"contentPageStyle\">\r\n    <div class=\"headerPosition col-md-12\">\r\n      <div class=\"navigation-container\">\r\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button \r\n        (click)=\"drawer.toggle(); toggleClick = !toggleClick\">\r\n          <span [ngClass]=\"toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'\"></span>\r\n          Cart\r\n        </button>\r\n        <app-categories class=\"categories\"></app-categories>\r\n      </div>\r\n\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</mat-drawer-container>"
+module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\r\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\r\n    <div class=\"col-md-12\">\r\n      <app-cart></app-cart>\r\n    </div>\r\n  </mat-drawer>\r\n  <div class=\"contentPageStyle\">\r\n    <div class=\"headerPosition col-md-12\">\r\n      <div class=\"navigation-container\">\r\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button \r\n        (click)=\"drawer.toggle(); toggleClick = !toggleClick\">\r\n          <span [ngClass]=\"toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'\"></span>\r\n          Cart\r\n        </button>\r\n        <app-categories class=\"categories\"></app-categories>\r\n      </div>\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</mat-drawer-container>"
 
 /***/ }),
 

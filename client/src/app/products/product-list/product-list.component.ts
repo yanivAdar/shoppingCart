@@ -123,21 +123,21 @@ export class AddProductListComponent implements OnInit {
   }
   onFileChange(event) {
     let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
+    if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.addingProductsForm.controls.imagePath.setValue(this.domSanitizer.bypassSecurityTrustUrl(reader.result)['changingThisBreaksApplicationSecurity'])
         console.log(this.addingProductsForm.controls.imagePath.value);
-        
+
         // this.addingProductsForm.get('imagePath').setValue(
-          // {
-          // filename: file.name,
-          // filetype: file.type,
-          // value: reader.result.split(',')[1]
-          // reader.result.split(',')[1]
+        // {
+        // filename: file.name,
+        // filetype: file.type,
+        // value: reader.result.split(',')[1]
+        // reader.result.split(',')[1]
         // }
-      // )
+        // )
       };
     }
   }
@@ -171,12 +171,15 @@ let user;
   templateUrl: 'add-product-to-cart.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class AddProductToCartComponent implements OnInit {
+export class AddProductToCartComponent implements OnInit, OnDestroy {
+
+  constructor(private loginService: LoginService, private cartService: CartService, private productService: ProductsService, public dialogRef: MatDialogRef<AddProductToCartComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
+
   product = this.data.product;
   addingProductToCartForm: FormGroup
   isEditMode = this.data.isEditMode;
+  private ngUnsubscribe = new Subject<void>();
 
-  constructor(private loginService: LoginService, private cartService: CartService, private productService: ProductsService, public dialogRef: MatDialogRef<AddProductToCartComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
     this.initAddingProductToCartForm();
@@ -193,20 +196,25 @@ export class AddProductToCartComponent implements OnInit {
       this.product.price,
       this.addingProductToCartForm.controls.amount.value
     )
-    this.loginService.loggedInUser.subscribe(user => {
-      console.log(user);
+    this.loginService.loggedInUser
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(user => {
+        console.log(user);
 
-      if (this.isEditMode) {
-        for (let i of this.cartService.cartItems) {
-          i.name === newCartItem.name ? i.amount = newCartItem.amount : null;
+        if (this.isEditMode) {
+          for (let i of this.cartService.cartItems) {
+            i.name === newCartItem.name ? i.amount = newCartItem.amount : null;
+          }
+          return this.cartService.updateCartItem(user['userId'], newCartItem);
         }
-        return this.cartService.updateCartItem(user['userId'], newCartItem);
-      }
-      return this.cartService.addedProduct.emit(newCartItem);
-    })
+        return this.cartService.addedProduct.emit(newCartItem);
+      })
   }
-
   onClose() {
     this.dialogRef.close();
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
