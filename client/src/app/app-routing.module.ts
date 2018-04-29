@@ -14,7 +14,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     {
         path: 'shopping-main', canActivate: [AuthGuard], component: ProductsComponent, children: [
-            { path: ':category/products',canActivate: [AuthGuard], component: ProductListComponent },
+            { path: ':category/products', component: ProductListComponent },
             { path: 'search', component: SearchComponent }
         ]
     },

@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
-      <li *ngFor="let item of getCartItems()" class="list-group-item">
+      <li *ngFor="let item of getCartItems()" class="list-group-item listStyle">
         <ul class="list-group ulPosition">
           <div class="hoverToShow" *ngIf="!hoverDelete">
             <button class="btn btn-danger btnStyle" (click)="hoverDelete = true">
@@ -37,9 +37,9 @@
               </button>
             </div>
           </div>
-          <li class="list-group-item">Name: {{item.name}}</li>
-          <li class="list-group-item">Quantity: {{item.amount}} * {{item.price}}$</li>
-          <li class="list-group-item">Price: {{item.price*item.amount}}$</li>
+          <li class="list-group-item listStyle">Name: {{item.name}}</li>
+          <li class="list-group-item listStyle">Quantity: {{item.amount}} * {{item.price}}$</li>
+          <li class="list-group-item listStyle">Price: {{item.price*item.amount}}$</li>
         </ul>
       </li>
     </ul>
@@ -47,7 +47,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <h4>
+    <h4 style="display: inline-flex;">
       Total: {{totalPrice}}$
     </h4>
     <button class="btn btn-primary pull-right" (click)="orderCart()">Order</button>

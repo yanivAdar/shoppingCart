@@ -43,7 +43,7 @@ var appRoutes = [
     { path: 'register', component: register_component_1.RegisterComponent },
     {
         path: 'shopping-main', canActivate: [auth_guard_1.AuthGuard], component: products_component_1.ProductsComponent, children: [
-            { path: ':category/products', canActivate: [auth_guard_1.AuthGuard], component: product_list_component_1.ProductListComponent },
+            { path: ':category/products', component: product_list_component_1.ProductListComponent },
             { path: 'search', component: search_component_1.SearchComponent }
         ]
     },
@@ -160,6 +160,7 @@ var register_component_1 = __webpack_require__("./src/app/login/register/registe
 var register_service_1 = __webpack_require__("./src/app/services/register.service.ts");
 var cart_service_1 = __webpack_require__("./src/app/services/cart.service.ts");
 var order_component_1 = __webpack_require__("./src/app/order/order.component.ts");
+var ng2_opd_popup_1 = __webpack_require__("./node_modules/ng2-opd-popup/index.js");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -184,6 +185,7 @@ AppModule = __decorate([
         ],
         entryComponents: [product_list_component_1.AddProductListComponent, product_list_component_1.AddProductToCartComponent],
         imports: [
+            ng2_opd_popup_1.PopupModule.forRoot(),
             platform_browser_1.BrowserModule,
             app_routing_module_1.AppRoutingModule,
             http_1.HttpModule,
@@ -191,7 +193,7 @@ AppModule = __decorate([
             animations_1.BrowserAnimationsModule,
             material_1.MatDialogModule,
             forms_1.ReactiveFormsModule,
-            forms_1.FormsModule
+            forms_1.FormsModule,
         ],
         providers: [categories_service_1.CategoriesService, products_service_1.ProductsService, login_service_1.LoginService, auth_guard_1.AuthGuard, register_service_1.RegisterService, cart_service_1.CartService, product_list_component_1.ProductListComponent],
         bootstrap: [app_component_1.AppComponent]
@@ -302,7 +304,7 @@ module.exports = ".logoutBtn{\r\n    cursor: pointer;\r\n}"
 /***/ "./src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n      <div class=\"navbar-header\">\r\n          <a routerLink=\"/shopping-main\" class=\"navbar-brand\">Shopping Cart Project</a>\r\n      </div>\r\n      <div>\r\n          <ul class=\"nav navbar-nav\">\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li>\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\r\n              <li class=\"logoutBtn\" routerLinkActive=\"active\"><a (click)=\"onLogout()\">Logout</a></li>\r\n          </ul>\r\n          <ul class=\"nav navbar-nav navbar-right\">\r\n             <li>{{userEmail}}</li>\r\n          </ul>\r\n      </div>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n      <div class=\"navbar-header\">\r\n          <a routerLink=\"/shopping-main\" class=\"navbar-brand\">Shopping Cart Project</a>\r\n      </div>\r\n      <div>\r\n          <ul class=\"nav navbar-nav\">\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li>\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\r\n              <li class=\"logoutBtn\" routerLinkActive=\"active\"><a (click)=\"onLogout()\">Logout</a></li>\r\n          </ul>\r\n          <ul class=\"nav navbar-nav navbar-right\">\r\n             <li class=\"navbar-text\">{{userEmail}}</li>\r\n          </ul>\r\n      </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -546,14 +548,14 @@ var _a, _b;
 /***/ "./src/app/order/order.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".clickble{\r\n    cursor: pointer;\r\n    display: inline;\r\n}\r\n.titleStyle{\r\n    display: -webkit-inline-box;\r\n    display: -ms-inline-flexbox;\r\n    display: inline-flex;\r\n}"
+module.exports = ".clickble{\r\n    cursor: pointer;\r\n    display: inline;\r\n}\r\n.titleStyle{\r\n    display: -webkit-inline-box;\r\n    display: -ms-inline-flexbox;\r\n    display: inline-flex;\r\n}\r\n.btnStyle{\r\n    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n            box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n    background-color: #fcfcfc;\r\n    border-radius: 6px;\r\n    border: 1px solid #dcdcdc;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    color: #777777;\r\n    font-family: Arial;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    padding: 6px 24px;\r\n    text-decoration: none;\r\n    text-shadow: 0px 1px 0px #ffffff;\r\n}\r\n.greetingStyle{\r\n    text-align: center;\r\n}\r\n.inputsStyle{\r\n    text-align: center;\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/order/order.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n    <div>\r\n      <h4 class=\"titleStyle\">My Cart</h4>\r\n      <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\r\n    </div>\r\n    <hr style=\"margin-top:0;\" />\r\n    <table class=\"table\">\r\n      <thead>\r\n        <tr>\r\n          <th scope=\"col\">#</th>\r\n          <th scope=\"col\">Item Name</th>\r\n          <th scope=\"col\">Amount</th>\r\n          <th scope=\"col\">Price</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let item of cartItems; let i = index\">\r\n          <th scope=\"row\">{{i}}</th>\r\n          <td>{{item.name}}</td>\r\n          <td>{{item.amount}}</td>\r\n          <td>{{item.price}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <h5>\r\n      <b>Total: {{totalSum}}$</b>\r\n    </h5>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <h4>Order</h4>\r\n    <hr style=\"margin-top:0;\" />\r\n    <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"city\">City</label>\r\n                    <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"street\">Street</label>\r\n                    <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"shipping-date\">Shipping Date</label>\r\n                    <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">My Cart</h4>\r\n            <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th scope=\"col\">#</th>\r\n                    <th scope=\"col\">Item Name</th>\r\n                    <th scope=\"col\">Amount</th>\r\n                    <th scope=\"col\">Item Price</th>\r\n                    <th scope=\"col\">Price</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of cartItems; let i = index\">\r\n                    <th scope=\"row\">{{i+1}}</th>\r\n                    <td>{{item.name}}</td>\r\n                    <td>{{item.amount}}</td>\r\n                    <td>{{item.price}}$</td>\r\n                    <td>{{item.price*item.amount}}$</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <h5>\r\n            <b>Total Price: {{totalSum}}$</b>\r\n        </h5>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">Order</h4>\r\n            <h4 class=\"pull-right\">\r\n                <b>{{user.name}} {{user.last}}</b>\r\n            </h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"city\">City</label>\r\n                        <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"street\">Street</label>\r\n                        <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"shipping-date\">Shipping Date</label>\r\n                        <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n<popup>\r\n    <h1 class=\"greetingStyle\">Great!</h1>\r\n    <h4>We'v placed your order, our delivery should get to your door step within the next 3 hours, thank you for shopping with us</h4>\r\n    <div class=\"inputsStyle\">\r\n        <div style=\"margin-bottom: 10px;\">\r\n            <input type=\"checkbox\" #recite checked>\r\n            <span>\r\n                Download Recite\r\n            </span>\r\n        </div>\r\n        <button class=\"btnStyle\" (click)=\"logout(recite)\">Logout</button>\r\n        <button class=\"btnStyle\" (click)=\"backShopping(recite)\">I'd like to shop some more!</button>\r\n    </div>\r\n</popup>"
 
 /***/ }),
 
@@ -577,16 +579,23 @@ var router_1 = __webpack_require__("./node_modules/@angular/router/@angular/rout
 var cart_service_1 = __webpack_require__("./src/app/services/cart.service.ts");
 var login_service_1 = __webpack_require__("./src/app/services/login.service.ts");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/@angular/forms.es5.js");
+var ng2_opd_popup_1 = __webpack_require__("./node_modules/ng2-opd-popup/index.js");
 var OrderComponent = (function () {
-    function OrderComponent(router, cartService, loginService) {
+    function OrderComponent(router, cartService, loginService, popup) {
         this.router = router;
         this.cartService = cartService;
         this.loginService = loginService;
+        this.popup = popup;
         this.totalSum = 0;
+        this.user = {
+            name: '',
+            last: ''
+        };
+        this.showing = false;
     }
     OrderComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.initOrderForm();
+        this.initOrderForm(null, null);
         if (this.cartService.cartItems.length != 0) {
             this.cartItems = this.cartService.cartItems;
             this.cartService.cartItems.forEach(function (item) {
@@ -594,24 +603,49 @@ var OrderComponent = (function () {
             });
             this.loginService.loggedInUser.subscribe(function (user) {
                 _this.loginService.getUser(user['userId']).subscribe(function (user) {
+                    _this.user = user;
+                    console.log(user);
+                    _this.initOrderForm(user.city, user.street);
                 });
             });
         }
         else
             this.router.navigate(['/shopping-main']);
+        this.initPopupOption();
     };
     OrderComponent.prototype.navigateBack = function () {
         this.router.navigate(['/shopping-main']);
     };
-    OrderComponent.prototype.initOrderForm = function () {
+    OrderComponent.prototype.initOrderForm = function (city, street) {
         this.orderForm = new forms_1.FormGroup({
-            'city': new forms_1.FormControl(null, forms_1.Validators.required),
-            'street': new forms_1.FormControl(null, forms_1.Validators.required),
+            'city': new forms_1.FormControl(city, forms_1.Validators.required),
+            'street': new forms_1.FormControl(street, forms_1.Validators.required),
             'date': new forms_1.FormControl(null, forms_1.Validators.required)
         });
     };
     OrderComponent.prototype.onSubmit = function () {
-        console.log('bla');
+        this.popup.show();
+    };
+    OrderComponent.prototype.initPopupOption = function () {
+        this.popup.options = {
+            animationDuration: 0.3,
+            header: 'Order complete',
+            color: '#3ac47d',
+            showButtons: false
+        };
+    };
+    OrderComponent.prototype.backShopping = function (recite) {
+        if (recite.checked)
+            this.downloadRecite();
+        console.log('more shopping');
+    };
+    OrderComponent.prototype.logout = function (recite) {
+        if (recite.checked)
+            this.downloadRecite();
+        this.loginService.logout();
+    };
+    OrderComponent.prototype.downloadRecite = function () {
+        console.log(this.cartItems);
     };
     return OrderComponent;
 }());
@@ -621,10 +655,10 @@ OrderComponent = __decorate([
         template: __webpack_require__("./src/app/order/order.component.html"),
         styles: [__webpack_require__("./src/app/order/order.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof cart_service_1.CartService !== "undefined" && cart_service_1.CartService) === "function" && _b || Object, typeof (_c = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof cart_service_1.CartService !== "undefined" && cart_service_1.CartService) === "function" && _b || Object, typeof (_c = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _c || Object, typeof (_d = typeof ng2_opd_popup_1.Popup !== "undefined" && ng2_opd_popup_1.Popup) === "function" && _d || Object])
 ], OrderComponent);
 exports.OrderComponent = OrderComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=order.component.js.map
 
 /***/ }),
@@ -632,14 +666,14 @@ var _a, _b, _c;
 /***/ "./src/app/products/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item\">\r\n        <ul class=\"list-group ulPosition\">\r\n          <div class=\"hoverToShow\" *ngIf=\"!hoverDelete\">\r\n            <button class=\"btn btn-danger btnStyle\" (click)=\"hoverDelete = true\">\r\n              <span class=\"glyphicon glyphicon-remove\"></span>\r\n            </button>\r\n            <button class=\"btn btn-success btnStyle\" (click)=\"editItem(item)\">\r\n              <span class=\"glyphicon glyphicon-edit\"></span>\r\n            </button>\r\n          </div>\r\n          <div class=\"hoverToShow\" *ngIf=\"hoverDelete\">\r\n            <p class=\"pStyle\">Are you sure you want to delete {{item.name}} from the cart?</p>\r\n            <div style=\"flex-direction:row-reverse\">\r\n              <button class=\"btn btn-danger btnStyle\" (click)=\"removeItemFromCart(item)\">\r\n                <span class=\"glyphicon glyphicon-trash\"></span>\r\n              </button>\r\n              <button class=\"btn btn-primary btnStyle\" (click)=\"hoverDelete = false\">\r\n                <span class=\"glyphicon glyphicon-circle-arrow-left\"></span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n          <li class=\"list-group-item\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item\">Quantity: {{item.amount}} * {{item.price}}$</li>\r\n          <li class=\"list-group-item\">Price: {{item.price*item.amount}}$</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Total: {{totalPrice}}$\r\n    </h4>\r\n    <button class=\"btn btn-primary pull-right\" (click)=\"orderCart()\">Order</button>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item listStyle\">\r\n        <ul class=\"list-group ulPosition\">\r\n          <div class=\"hoverToShow\" *ngIf=\"!hoverDelete\">\r\n            <button class=\"btn btn-danger btnStyle\" (click)=\"hoverDelete = true\">\r\n              <span class=\"glyphicon glyphicon-remove\"></span>\r\n            </button>\r\n            <button class=\"btn btn-success btnStyle\" (click)=\"editItem(item)\">\r\n              <span class=\"glyphicon glyphicon-edit\"></span>\r\n            </button>\r\n          </div>\r\n          <div class=\"hoverToShow\" *ngIf=\"hoverDelete\">\r\n            <p class=\"pStyle\">Are you sure you want to delete {{item.name}} from the cart?</p>\r\n            <div style=\"flex-direction:row-reverse\">\r\n              <button class=\"btn btn-danger btnStyle\" (click)=\"removeItemFromCart(item)\">\r\n                <span class=\"glyphicon glyphicon-trash\"></span>\r\n              </button>\r\n              <button class=\"btn btn-primary btnStyle\" (click)=\"hoverDelete = false\">\r\n                <span class=\"glyphicon glyphicon-circle-arrow-left\"></span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n          <li class=\"list-group-item listStyle\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item listStyle\">Quantity: {{item.amount}} * {{item.price}}$</li>\r\n          <li class=\"list-group-item listStyle\">Price: {{item.price*item.amount}}$</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4 style=\"display: inline-flex;\">\r\n      Total: {{totalPrice}}$\r\n    </h4>\r\n    <button class=\"btn btn-primary pull-right\" (click)=\"orderCart()\">Order</button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/products/cart/cart.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".btnStyle {\n  position: relative;\n  margin: 4px;\n  -webkit-box-shadow: 2px 2px 4px grey;\n          box-shadow: 2px 2px 4px grey; }\n\n.hoverToShow {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end; }\n\n.hoverToShow:hover {\n  opacity: 1; }\n\n.ulPosition {\n  position: relative; }\n\n.pStyle {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.4);\n  text-align: center;\n  border-radius: 4px; }\n"
+module.exports = ".btnStyle {\n  position: relative;\n  margin: 4px;\n  -webkit-box-shadow: 2px 2px 4px grey;\n          box-shadow: 2px 2px 4px grey; }\n\n.hoverToShow {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end; }\n\n.hoverToShow:hover {\n  opacity: 1; }\n\n.ulPosition {\n  position: relative; }\n\n.pStyle {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.4);\n  text-align: center;\n  border-radius: 4px; }\n\n.listStyle {\n  padding: 6px 9px; }\n"
 
 /***/ }),
 
@@ -875,7 +909,7 @@ exports.CategoriesComponent = CategoriesComponent;
 /***/ "./src/app/products/product-list/add-product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"addingProductsForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"file\" id=\"imagePath\" class=\"form-control\" (change)=\"onFileChange($event)\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <p>\r\n                  {{imagePath.value}}\r\n                </p>\r\n                <img [src]=\"imagePath.value\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\" min=\"1\">\r\n              </div>\r\n            </div>\r\n            <!-- </div>\r\n          <div class=\"row\"> -->\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"current.name == 'General'\">\r\n                  <label for=\"category\">Category</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\" [value]=\"category._id\">{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <p>{{errorMsg}}</p>\r\n              <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!addingProductsForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- <input matInput tabindex=\"1\" [(ngModel)]=\"data.animal\"> -->\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <!-- <button mat-button (click)=\"onNoClick()\">No Thanks</button> -->\r\n  <!-- <button mat-button [mat-dialog-close]=\"data.animal\" cdkFocusInitial>Ok</button> -->\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"addingProductsForm\" (ngSubmit)=\"onSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" id=\"name\" class=\"form-control\" formControlName=\"name\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"imagePath\">Image URL</label>\r\n                <input type=\"file\" id=\"imagePath\" class=\"form-control\" (change)=\"onFileChange($event)\" #imagePath>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-6 pull-right\">\r\n              <div class=\"form-group\">\r\n                <img [src]=\"imagePreview\" alt=\"\" class=\"img-responsive imgStyle\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" id=\"price\" class=\"form-control\" formControlName=\"price\" min=\"1\">\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-6\">\r\n              <div class=\"form-group\">\r\n                <div *ngIf=\"current.name == 'General'\">\r\n                  <label for=\"category\">Category</label>\r\n                  <select formControlName=\"category\" id=\"category\" class=\"form-control\">\r\n                    <option value=\"\" disabled=\"true\">Choose Category</option>\r\n                    <option *ngFor=\"let category of categories\" [value]=\"category._id\">{{ category.name }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n              <p>{{errorMsg}}</p>\r\n              <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!addingProductsForm.valid\">Save</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" (click)=\"onNoClick()\">Cancel</button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </mat-form-field>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -889,7 +923,7 @@ module.exports = "<h1 mat-dialog-title>Add Product To Cart</h1>\r\n<div mat-dial
 /***/ "./src/app/products/product-list/product-list.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "::ng-deep .mat-dialog-container{\r\n    margin-top: -250px;    \r\n}\r\n\r\n.imgStyle{\r\n    max-height: 180px;\r\n}\r\n\r\n.editBtnStyle{\r\n    opacity: 0;\r\n    margin: 5px;\r\n    height: 20%;\r\n    width: 18%;\r\n    bottom: 0;\r\n    left: 0;\r\n    padding: 2px;\r\n    position: absolute;\r\n    -webkit-transition: opacity 0.2s ease;\r\n    transition: opacity 0.2s ease;    \r\n}\r\n\r\n.styleList:hover .editBtnStyle{\r\n    opacity: 1;\r\n}"
+module.exports = "::ng-deep .mat-dialog-container{\r\n    margin-top: -250px;    \r\n}\r\n\r\n.imgStyle{\r\n    max-height: 130px;\r\n}\r\n\r\n.editBtnStyle{\r\n    opacity: 0;\r\n    margin: 5px;\r\n    height: 20%;\r\n    width: 18%;\r\n    bottom: 0;\r\n    left: 0;\r\n    padding: 2px;\r\n    position: absolute;\r\n    -webkit-transition: opacity 0.2s ease;\r\n    transition: opacity 0.2s ease;    \r\n}\r\n\r\n.styleList{\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.styleList:hover .editBtnStyle{\r\n    opacity: 1;\r\n}"
 
 /***/ }),
 
@@ -1004,7 +1038,7 @@ ProductListComponent = __decorate([
     __metadata("design:paramtypes", [typeof (_a = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof categories_service_1.CategoriesService !== "undefined" && categories_service_1.CategoriesService) === "function" && _c || Object, typeof (_d = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _d || Object, typeof (_e = typeof material_1.MatDialog !== "undefined" && material_1.MatDialog) === "function" && _e || Object])
 ], ProductListComponent);
 exports.ProductListComponent = ProductListComponent;
-//---------------------Add Product Component .ts file--------------------
+//---------------------Add Product As Admin Component .ts file--------------------
 var AddProductListComponent = (function () {
     function AddProductListComponent(domSanitizer, productService, dialogRef, data, categoriesService) {
         this.domSanitizer = domSanitizer;
@@ -1046,15 +1080,7 @@ var AddProductListComponent = (function () {
             reader.readAsDataURL(file);
             reader.onload = function () {
                 _this.addingProductsForm.controls.imagePath.setValue(_this.domSanitizer.bypassSecurityTrustUrl(reader.result)['changingThisBreaksApplicationSecurity']);
-                console.log(_this.addingProductsForm.controls.imagePath.value);
-                // this.addingProductsForm.get('imagePath').setValue(
-                // {
-                // filename: file.name,
-                // filetype: file.type,
-                // value: reader.result.split(',')[1]
-                // reader.result.split(',')[1]
-                // }
-                // )
+                _this.imagePreview = _this.addingProductsForm.controls.imagePath.value;
             };
         }
     };

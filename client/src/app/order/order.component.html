@@ -1,65 +1,86 @@
 <div class="row">
-  <div class="col-md-6">
-    <div>
-      <h4 class="titleStyle">My Cart</h4>
-      <h4 class="pull-right clickble" (click)="navigateBack()">Go Back Shopping</h4>
+    <div class="col-md-6">
+        <div>
+            <h4 class="titleStyle">My Cart</h4>
+            <h4 class="pull-right clickble" (click)="navigateBack()">Go Back Shopping</h4>
+        </div>
+        <hr style="margin-top:0;" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Item Price</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cartItems; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{item.name}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.price}}$</td>
+                    <td>{{item.price*item.amount}}$</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>
+            <b>Total Price: {{totalSum}}$</b>
+        </h5>
     </div>
-    <hr style="margin-top:0;" />
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Item Name</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems; let i = index">
-          <th scope="row">{{i}}</th>
-          <td>{{item.name}}</td>
-          <td>{{item.amount}}</td>
-          <td>{{item.price}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <h5>
-      <b>Total: {{totalSum}}$</b>
-    </h5>
-  </div>
-  <div class="col-md-6">
-    <h4>Order</h4>
-    <hr style="margin-top:0;" />
-    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" class="form-control" formControlName="city">
+    <div class="col-md-6">
+        <div>
+            <h4 class="titleStyle">Order</h4>
+            <h4 class="pull-right">
+                <b>{{user.name}} {{user.last}}</b>
+            </h4>
+        </div>
+        <hr style="margin-top:0;" />
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" class="form-control" formControlName="city">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="street">Street</label>
-                    <input type="text" id="street" class="form-control" formControlName="street">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="street">Street</label>
+                        <input type="text" id="street" class="form-control" formControlName="street">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="shipping-date">Shipping Date</label>
-                    <input type="date" id="shipping-date" class="form-control" formControlName="date">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="shipping-date">Shipping Date</label>
+                        <input type="date" id="shipping-date" class="form-control" formControlName="date">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <button type="sumbit" class="btn btn-success" [disabled]="!orderForm.valid">Order</button>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="sumbit" class="btn btn-success" [disabled]="!orderForm.valid">Order</button>
+                </div>
             </div>
-        </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
+<popup>
+    <h1 class="greetingStyle">Great!</h1>
+    <h4>We'v placed your order, our delivery should get to your door step within the next 3 hours, thank you for shopping with us</h4>
+    <div class="inputsStyle">
+        <div style="margin-bottom: 10px;">
+            <input type="checkbox" #recite checked>
+            <span>
+                Download Recite
+            </span>
+        </div>
+        <button class="btnStyle" (click)="logout(recite)">Logout</button>
+        <button class="btnStyle" (click)="backShopping(recite)">I'd like to shop some more!</button>
+    </div>
+</popup>

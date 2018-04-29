@@ -83,7 +83,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 
 
-//---------------------Add Product Component .ts file--------------------
+//---------------------Add Product As Admin Component .ts file--------------------
 @Component({
   selector: 'add-product-list',
   templateUrl: 'add-product-list.component.html',
@@ -96,6 +96,7 @@ export class AddProductListComponent implements OnInit {
   product = this.data.product;
   editMode;
   errorMsg;
+  imagePreview;
 
   constructor(private domSanitizer: DomSanitizer, private productService: ProductsService, public dialogRef: MatDialogRef<AddProductListComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private categoriesService: CategoriesService) { }
 
@@ -128,16 +129,7 @@ export class AddProductListComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.addingProductsForm.controls.imagePath.setValue(this.domSanitizer.bypassSecurityTrustUrl(reader.result)['changingThisBreaksApplicationSecurity'])
-        console.log(this.addingProductsForm.controls.imagePath.value);
-
-        // this.addingProductsForm.get('imagePath').setValue(
-        // {
-        // filename: file.name,
-        // filetype: file.type,
-        // value: reader.result.split(',')[1]
-        // reader.result.split(',')[1]
-        // }
-        // )
+        this.imagePreview = this.addingProductsForm.controls.imagePath.value;
       };
     }
   }

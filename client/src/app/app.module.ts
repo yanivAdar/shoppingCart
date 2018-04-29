@@ -25,6 +25,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { RegisterService } from './services/register.service';
 import { CartService } from './services/cart.service';
 import { OrderComponent } from './order/order.component';
+import { PopupModule } from 'ng2-opd-popup';   
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { OrderComponent } from './order/order.component';
   ],
   entryComponents: [AddProductListComponent, AddProductToCartComponent],
   imports: [
+    PopupModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpModule,
@@ -51,8 +53,7 @@ import { OrderComponent } from './order/order.component';
     BrowserAnimationsModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
   ],
   providers: [CategoriesService, ProductsService, LoginService, AuthGuard, RegisterService, CartService, ProductListComponent],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@
 }
 
 .imgStyle{
-    max-height: 180px;
+    max-height: 130px;
 }
 .editBtnStyle{
     opacity: 0;
@@ -15,6 +15,9 @@
     padding: 2px;
     position: absolute;
     transition: opacity 0.2s ease;    
+}
+.styleList{
+    margin-bottom: 10px;
 }
 .styleList:hover .editBtnStyle{
     opacity: 1;
