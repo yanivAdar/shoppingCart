@@ -6,6 +6,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Popup } from 'ng2-opd-popup';
 
 
+
+
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -14,6 +17,7 @@ import { Popup } from 'ng2-opd-popup';
 export class OrderComponent implements OnInit {
 
   constructor(private router: Router, private cartService: CartService, private loginService: LoginService, private popup: Popup) { }
+  recite = ['Recite \r\n'];
 
   cartItems;
   totalSum = 0;
@@ -32,12 +36,8 @@ export class OrderComponent implements OnInit {
         this.totalSum += item.price * item.amount;
       })
       this.loginService.loggedInUser.subscribe(user => {
-        this.loginService.getUser(user['userId']).subscribe(user => {
-          this.user = user;
-          console.log(user);
-
-          this.initOrderForm(user.city, user.street);
-        })
+        this.user = user;
+        this.initOrderForm(user['city'], user['street']);
       })
     }
     else this.router.navigate(['/shopping-main']);
@@ -66,16 +66,30 @@ export class OrderComponent implements OnInit {
       showButtons: false
     }
   }
-  backShopping(recite){
-    if (recite.checked) this.downloadRecite();  
-    console.log('more shopping');
+  backShopping(recite) {
+    if (recite.checked) this.downloadRecite();
+    this.cartService.clearCart();
+    this.router.navigate(['/shopping-main']);
   }
-  logout(recite){
-    if (recite.checked) this.downloadRecite();  
-    this.loginService.logout(); 
+  logout(recite) {
+    if (recite.checked) this.downloadRecite();
+    this.loginService.logout();
   }
-  downloadRecite(){
-    console.log(this.cartItems);
-    
+  downloadRecite() {
+    let a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(new Blob(this.createRecite(), { type: 'text/csv' }));
+    a.download = 'recite.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
+  createRecite() {
+    this.cartItems.forEach(item => {
+      this.recite.push('Item name: ' + item.name + ', Amount: ' + item.amount + ', Price: ' + item.price + '\r\n');
+    })
+    this.recite.push('Total Price: ' + this.totalSum);
+    return this.recite;
+    // let recite = document.getElementById('recite');
   }
 }

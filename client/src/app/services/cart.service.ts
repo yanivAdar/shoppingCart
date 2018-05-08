@@ -12,6 +12,14 @@ export class CartService {
     url = 'http://localhost:4500/users/cart/'
     addedProduct = new EventEmitter<Cart>();
 
+    getTotalPrice() {
+        this.totalPrice = 0;
+        this.cartItems.forEach(item => {
+            this.totalPrice += item.price * item.amount;
+        })
+        return this.totalPrice;
+    }
+
     getUserCart(userId) {
         this.http.get(this.url + userId).toPromise().then(res => {
             this.cartItems = res.json();
@@ -25,6 +33,9 @@ export class CartService {
     }
     deleteItemFromCart(userId, item) {
         this.http.post(this.url + 'delete/' + userId, item).toPromise();
+    }
+    clearCart(){
+        this.http.delete(this.url + 'deleteAll').toPromise();
     }
 
 }

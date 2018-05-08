@@ -18,7 +18,7 @@ export class CategoriesHeaderComponent implements OnInit {
         this.categories = data
       },
       err => console.log('err: ' + err),
-      () => console.log(this.categories));
+      () => {});
   }
   displayProd(data) {
     this.categoriesService.categoryId$$.next(data.currentTarget.id);

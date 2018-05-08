@@ -72,7 +72,7 @@
 </div>
 <popup>
     <h1 class="greetingStyle">Great!</h1>
-    <h4>We'v placed your order, our delivery should get to your door step within the next 3 hours, thank you for shopping with us</h4>
+    <h4 class="inputsStyle">We've placed your order, our delivery should get to your door step soon, thank you for shopping with us</h4>
     <div class="inputsStyle">
         <div style="margin-bottom: 10px;">
             <input type="checkbox" #recite checked>
@@ -84,3 +84,9 @@
         <button class="btnStyle" (click)="backShopping(recite)">I'd like to shop some more!</button>
     </div>
 </popup>
+<div id="recite">
+    <div *ngFor="let item of cartItems">
+        <h4>item: {{item.name}}, price: {{item.price}}, amount: {{item.amount}}</h4>
+        <h3>total: {{totalSum}}</h3>
+    </div>
+</div>

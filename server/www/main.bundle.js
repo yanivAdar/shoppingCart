@@ -271,12 +271,9 @@ var AuthGuard = (function () {
                     case 1:
                         res = _a.sent();
                         if (res['status'] == 401) {
-                            document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
                             this.router.navigate(['login']);
                             return [2 /*return*/, false];
                         }
-                        this.loginService.loggedInUser.next(JSON.parse(document.cookie.split(';')
-                            .find(function (el) { return el.includes('userDetails'); }).split('=')[1]));
                         return [2 /*return*/, true];
                 }
             });
@@ -304,7 +301,7 @@ module.exports = ".logoutBtn{\r\n    cursor: pointer;\r\n}"
 /***/ "./src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n      <div class=\"navbar-header\">\r\n          <a routerLink=\"/shopping-main\" class=\"navbar-brand\">Shopping Cart Project</a>\r\n      </div>\r\n      <div>\r\n          <ul class=\"nav navbar-nav\">\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li>\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\r\n              <li class=\"logoutBtn\" routerLinkActive=\"active\"><a (click)=\"onLogout()\">Logout</a></li>\r\n          </ul>\r\n          <ul class=\"nav navbar-nav navbar-right\">\r\n             <li class=\"navbar-text\">{{userEmail}}</li>\r\n          </ul>\r\n      </div>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n      <div class=\"navbar-header\">\r\n          <a routerLink=\"/shopping-main\" class=\"navbar-brand\">Shopping Cart Project</a>\r\n      </div>\r\n      <div>\r\n          <ul class=\"nav navbar-nav\">\r\n              <!-- <li routerLinkActive=\"active\"><a routerLink=\"/search\">Search</a></li> -->\r\n              <li routerLinkActive=\"active\"><a routerLink=\"/shopping-main\">Products</a></li>\r\n              <li class=\"logoutBtn\" routerLinkActive=\"active\"><a (click)=\"onLogout()\">Logout</a></li>\r\n          </ul>\r\n          <ul class=\"nav navbar-nav navbar-right\">\r\n             <li class=\"navbar-text\">{{userEmail}}</li>\r\n          </ul>\r\n      </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -332,7 +329,7 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.loginService.loggedInUser.subscribe(function (user) {
-            _this.userEmail = user['email'];
+            user ? _this.userEmail = user['email'] : _this.userEmail = '';
         });
     };
     HeaderComponent.prototype.onLogout = function () {
@@ -548,14 +545,14 @@ var _a, _b;
 /***/ "./src/app/order/order.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".clickble{\r\n    cursor: pointer;\r\n    display: inline;\r\n}\r\n.titleStyle{\r\n    display: -webkit-inline-box;\r\n    display: -ms-inline-flexbox;\r\n    display: inline-flex;\r\n}\r\n.btnStyle{\r\n    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n            box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n    background-color: #fcfcfc;\r\n    border-radius: 6px;\r\n    border: 1px solid #dcdcdc;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    color: #777777;\r\n    font-family: Arial;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    padding: 6px 24px;\r\n    text-decoration: none;\r\n    text-shadow: 0px 1px 0px #ffffff;\r\n}\r\n.greetingStyle{\r\n    text-align: center;\r\n}\r\n.inputsStyle{\r\n    text-align: center;\r\n}"
+module.exports = ".clickble{\r\n    cursor: pointer;\r\n    display: inline;\r\n}\r\n.titleStyle{\r\n    display: -webkit-inline-box;\r\n    display: -ms-inline-flexbox;\r\n    display: inline-flex;\r\n}\r\n.btnStyle{\r\n    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n            box-shadow: inset 0px 1px 0px 0px #ffffff;\r\n    background-color: #fcfcfc;\r\n    border-radius: 6px;\r\n    border: 1px solid #dcdcdc;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    color: #777777;\r\n    font-family: Arial;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    padding: 6px 24px;\r\n    text-decoration: none;\r\n    text-shadow: 0px 1px 0px #ffffff;\r\n}\r\n.greetingStyle{\r\n    text-align: center;\r\n}\r\n.inputsStyle{\r\n    text-align: center;\r\n}\r\n#recite{\r\n    display: none;\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/order/order.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">My Cart</h4>\r\n            <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th scope=\"col\">#</th>\r\n                    <th scope=\"col\">Item Name</th>\r\n                    <th scope=\"col\">Amount</th>\r\n                    <th scope=\"col\">Item Price</th>\r\n                    <th scope=\"col\">Price</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of cartItems; let i = index\">\r\n                    <th scope=\"row\">{{i+1}}</th>\r\n                    <td>{{item.name}}</td>\r\n                    <td>{{item.amount}}</td>\r\n                    <td>{{item.price}}$</td>\r\n                    <td>{{item.price*item.amount}}$</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <h5>\r\n            <b>Total Price: {{totalSum}}$</b>\r\n        </h5>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">Order</h4>\r\n            <h4 class=\"pull-right\">\r\n                <b>{{user.name}} {{user.last}}</b>\r\n            </h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"city\">City</label>\r\n                        <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"street\">Street</label>\r\n                        <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"shipping-date\">Shipping Date</label>\r\n                        <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n<popup>\r\n    <h1 class=\"greetingStyle\">Great!</h1>\r\n    <h4>We'v placed your order, our delivery should get to your door step within the next 3 hours, thank you for shopping with us</h4>\r\n    <div class=\"inputsStyle\">\r\n        <div style=\"margin-bottom: 10px;\">\r\n            <input type=\"checkbox\" #recite checked>\r\n            <span>\r\n                Download Recite\r\n            </span>\r\n        </div>\r\n        <button class=\"btnStyle\" (click)=\"logout(recite)\">Logout</button>\r\n        <button class=\"btnStyle\" (click)=\"backShopping(recite)\">I'd like to shop some more!</button>\r\n    </div>\r\n</popup>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">My Cart</h4>\r\n            <h4 class=\"pull-right clickble\" (click)=\"navigateBack()\">Go Back Shopping</h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th scope=\"col\">#</th>\r\n                    <th scope=\"col\">Item Name</th>\r\n                    <th scope=\"col\">Amount</th>\r\n                    <th scope=\"col\">Item Price</th>\r\n                    <th scope=\"col\">Price</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of cartItems; let i = index\">\r\n                    <th scope=\"row\">{{i+1}}</th>\r\n                    <td>{{item.name}}</td>\r\n                    <td>{{item.amount}}</td>\r\n                    <td>{{item.price}}$</td>\r\n                    <td>{{item.price*item.amount}}$</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <h5>\r\n            <b>Total Price: {{totalSum}}$</b>\r\n        </h5>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <div>\r\n            <h4 class=\"titleStyle\">Order</h4>\r\n            <h4 class=\"pull-right\">\r\n                <b>{{user.name}} {{user.last}}</b>\r\n            </h4>\r\n        </div>\r\n        <hr style=\"margin-top:0;\" />\r\n        <form [formGroup]=\"orderForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"city\">City</label>\r\n                        <input type=\"text\" id=\"city\" class=\"form-control\" formControlName=\"city\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"street\">Street</label>\r\n                        <input type=\"text\" id=\"street\" class=\"form-control\" formControlName=\"street\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"shipping-date\">Shipping Date</label>\r\n                        <input type=\"date\" id=\"shipping-date\" class=\"form-control\" formControlName=\"date\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\">\r\n                    <button type=\"sumbit\" class=\"btn btn-success\" [disabled]=\"!orderForm.valid\">Order</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n<popup>\r\n    <h1 class=\"greetingStyle\">Great!</h1>\r\n    <h4 class=\"inputsStyle\">We've placed your order, our delivery should get to your door step soon, thank you for shopping with us</h4>\r\n    <div class=\"inputsStyle\">\r\n        <div style=\"margin-bottom: 10px;\">\r\n            <input type=\"checkbox\" #recite checked>\r\n            <span>\r\n                Download Recite\r\n            </span>\r\n        </div>\r\n        <button class=\"btnStyle\" (click)=\"logout(recite)\">Logout</button>\r\n        <button class=\"btnStyle\" (click)=\"backShopping(recite)\">I'd like to shop some more!</button>\r\n    </div>\r\n</popup>\r\n<div id=\"recite\">\r\n    <div *ngFor=\"let item of cartItems\">\r\n        <h4>item: {{item.name}}, price: {{item.price}}, amount: {{item.amount}}</h4>\r\n        <h3>total: {{totalSum}}</h3>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -586,6 +583,7 @@ var OrderComponent = (function () {
         this.cartService = cartService;
         this.loginService = loginService;
         this.popup = popup;
+        this.recite = ['Recite \r\n'];
         this.totalSum = 0;
         this.user = {
             name: '',
@@ -602,11 +600,8 @@ var OrderComponent = (function () {
                 _this.totalSum += item.price * item.amount;
             });
             this.loginService.loggedInUser.subscribe(function (user) {
-                _this.loginService.getUser(user['userId']).subscribe(function (user) {
-                    _this.user = user;
-                    console.log(user);
-                    _this.initOrderForm(user.city, user.street);
-                });
+                _this.user = user;
+                _this.initOrderForm(user['city'], user['street']);
             });
         }
         else
@@ -637,7 +632,8 @@ var OrderComponent = (function () {
     OrderComponent.prototype.backShopping = function (recite) {
         if (recite.checked)
             this.downloadRecite();
-        console.log('more shopping');
+        this.cartService.clearCart();
+        this.router.navigate(['/shopping-main']);
     };
     OrderComponent.prototype.logout = function (recite) {
         if (recite.checked)
@@ -645,7 +641,21 @@ var OrderComponent = (function () {
         this.loginService.logout();
     };
     OrderComponent.prototype.downloadRecite = function () {
-        console.log(this.cartItems);
+        var a = window.document.createElement('a');
+        a.href = window.URL.createObjectURL(new Blob(this.createRecite(), { type: 'text/csv' }));
+        a.download = 'recite.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+    OrderComponent.prototype.createRecite = function () {
+        var _this = this;
+        this.cartItems.forEach(function (item) {
+            _this.recite.push('Item name: ' + item.name + ', Amount: ' + item.amount + ', Price: ' + item.price + '\r\n');
+        });
+        this.recite.push('Total Price: ' + this.totalSum);
+        return this.recite;
+        // let recite = document.getElementById('recite');
     };
     return OrderComponent;
 }());
@@ -666,14 +676,14 @@ var _a, _b, _c, _d;
 /***/ "./src/app/products/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of getCartItems()\" class=\"list-group-item listStyle\">\r\n        <ul class=\"list-group ulPosition\">\r\n          <div class=\"hoverToShow\" *ngIf=\"!hoverDelete\">\r\n            <button class=\"btn btn-danger btnStyle\" (click)=\"hoverDelete = true\">\r\n              <span class=\"glyphicon glyphicon-remove\"></span>\r\n            </button>\r\n            <button class=\"btn btn-success btnStyle\" (click)=\"editItem(item)\">\r\n              <span class=\"glyphicon glyphicon-edit\"></span>\r\n            </button>\r\n          </div>\r\n          <div class=\"hoverToShow\" *ngIf=\"hoverDelete\">\r\n            <p class=\"pStyle\">Are you sure you want to delete {{item.name}} from the cart?</p>\r\n            <div style=\"flex-direction:row-reverse\">\r\n              <button class=\"btn btn-danger btnStyle\" (click)=\"removeItemFromCart(item)\">\r\n                <span class=\"glyphicon glyphicon-trash\"></span>\r\n              </button>\r\n              <button class=\"btn btn-primary btnStyle\" (click)=\"hoverDelete = false\">\r\n                <span class=\"glyphicon glyphicon-circle-arrow-left\"></span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n          <li class=\"list-group-item listStyle\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item listStyle\">Quantity: {{item.amount}} * {{item.price}}$</li>\r\n          <li class=\"list-group-item listStyle\">Price: {{item.price*item.amount}}$</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4 style=\"display: inline-flex;\">\r\n      Total: {{totalPrice}}$\r\n    </h4>\r\n    <button class=\"btn btn-primary pull-right\" (click)=\"orderCart()\">Order</button>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h3>\r\n      My Cart\r\n    </h3>\r\n    <hr>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4>\r\n      Products:\r\n    </h4>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <ul class=\"list-group\">\r\n      <li *ngFor=\"let item of cartService.cartItems\" class=\"list-group-item listStyle\">\r\n        <ul class=\"list-group ulPosition\">\r\n          <div class=\"hoverToShow\" *ngIf=\"!hoverDelete\">\r\n            <button class=\"btn btn-danger btnStyle\" (click)=\"hoverDelete = true\">\r\n              <span class=\"glyphicon glyphicon-remove\"></span>\r\n            </button>\r\n            <button class=\"btn btn-success btnStyle\" (click)=\"editItem(item)\">\r\n              <span class=\"glyphicon glyphicon-edit\"></span>\r\n            </button>\r\n          </div>\r\n          <div class=\"hoverToShow\" *ngIf=\"hoverDelete\">\r\n            <p class=\"pStyle\">Are you sure you want to delete {{item.name}} from the cart?</p>\r\n            <div style=\"flex-direction:row-reverse\">\r\n              <button class=\"btn btn-danger btnStyle\" (click)=\"removeItemFromCart(item)\">\r\n                <span class=\"glyphicon glyphicon-trash\"></span>\r\n              </button>\r\n              <button class=\"btn btn-primary btnStyle\" (click)=\"hoverDelete = false\">\r\n                <span class=\"glyphicon glyphicon-circle-arrow-left\"></span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n          <li class=\"list-group-item listStyle\">Name: {{item.name}}</li>\r\n          <li class=\"list-group-item listStyle\">Quantity: {{item.amount}} * {{item.price}}$</li>\r\n          <li class=\"list-group-item listStyle\">Price: {{item.price*item.amount}}$</li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <h4 style=\"display: inline-flex;\">\r\n      Total: {{cartService.getTotalPrice()}}$\r\n    </h4>\r\n    <button class=\"btn btn-primary pull-right\" (click)=\"orderCart()\">Order</button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/products/cart/cart.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".btnStyle {\n  position: relative;\n  margin: 4px;\n  -webkit-box-shadow: 2px 2px 4px grey;\n          box-shadow: 2px 2px 4px grey; }\n\n.hoverToShow {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end; }\n\n.hoverToShow:hover {\n  opacity: 1; }\n\n.ulPosition {\n  position: relative; }\n\n.pStyle {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.4);\n  text-align: center;\n  border-radius: 4px; }\n\n.listStyle {\n  padding: 6px 9px; }\n"
+module.exports = ".btnStyle {\n  position: relative;\n  margin: 4px;\n  -webkit-box-shadow: 2px 2px 4px grey;\n          box-shadow: 2px 2px 4px grey; }\n\n.hoverToShow {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end; }\n\n.hoverToShow:hover {\n  opacity: 1; }\n\n.ulPosition {\n  position: relative; }\n\n.pStyle {\n  color: white;\n  background-color: rgba(0, 0, 0, 0.4);\n  text-align: center;\n  border-radius: 4px;\n  margin: 0px; }\n\n.listStyle {\n  padding: 6px 9px; }\n"
 
 /***/ }),
 
@@ -710,8 +720,9 @@ var CartComponent = (function () {
         var _this = this;
         this.hoverDelete = false;
         this.loginService.loggedInUser.subscribe(function (user) {
-            _this.userId = user['userId'];
-            _this.cartService.getUserCart(_this.userId);
+            _this.userId = user['_id'];
+            _this.cartService.cartItems = user['cart'];
+            // this.getTotalPrice();
         });
         this.cartService.addedProduct
             .takeUntil(this.ngUnsubscribe)
@@ -735,17 +746,12 @@ var CartComponent = (function () {
             _this.totalPrice += item.price * item.amount;
         });
     };
-    CartComponent.prototype.getCartItems = function () {
-        this.getTotalPrice();
-        return this.cartService.cartItems;
-    };
     CartComponent.prototype.removeItemFromCart = function (item) {
         this.hoverDelete = false;
         this.cartService.deleteItemFromCart(this.userId, item);
         this.cartService.cartItems = this.cartService.cartItems.filter(function (cartItem) {
             return cartItem.name !== item.name;
         });
-        console.log(this.cartService.cartItems);
     };
     CartComponent.prototype.editItem = function (item) {
         this.productListComponent.openAddItemToCart(item, true);
@@ -835,7 +841,7 @@ var CategoriesHeaderComponent = (function () {
         this.categoriesService.getCategories().subscribe(function (data) {
             _this.categoriesService.categories$$.next(data);
             _this.categories = data;
-        }, function (err) { return console.log('err: ' + err); }, function () { return console.log(_this.categories); });
+        }, function (err) { return console.log('err: ' + err); }, function () { });
     };
     CategoriesHeaderComponent.prototype.displayProd = function (data) {
         this.categoriesService.categoryId$$.next(data.currentTarget.id);
@@ -916,7 +922,7 @@ module.exports = "<h1 mat-dialog-title>Add Product</h1>\r\n<div mat-dialog-conte
 /***/ "./src/app/products/product-list/add-product-to-cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Add Product To Cart</h1>\r\n<div mat-dialog-content>\r\n    <mat-form-field>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <p>\r\n                    <b>Product Name:</b> {{product.name}}</p>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <p>\r\n                    <b>Product Price:</b> {{product.price*amount.value}}</p>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <form [formGroup]=\"addingProductToCartForm\" (ngSubmit)=\"onSubmit()\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xs-6\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"amount\">Amount</label>\r\n                                <input type=\"number\" id=\"amount\" class=\"form-control\" formControlName=\"amount\" #amount min=\"1\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xs-12\">\r\n                            <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onClose()\" [disabled]=\"!addingProductToCartForm.valid\">Save To Cart</button>\r\n                            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClose()\">Cancel</button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </mat-form-field>\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Add Product To Cart</h1>\r\n<div mat-dialog-content>\r\n    <mat-form-field>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <p>\r\n                    <b>Product Name:</b> {{product.name}}</p>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <p>\r\n                    <b>Product Price:</b> {{product.price}}</p>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <form [formGroup]=\"addingProductToCartForm\" (ngSubmit)=\"onSubmit()\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xs-6\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"amount\">Amount</label>\r\n                                <input type=\"number\" id=\"amount\" class=\"form-control\" formControlName=\"amount\" #amount min=\"1\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xs-12\">\r\n                            <button type=\"sumbit\" class=\"btn btn-success\" (click)=\"onClose()\" [disabled]=\"!addingProductToCartForm.valid\">Save To Cart</button>\r\n                            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClose()\">Cancel</button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </mat-form-field>\r\n</div>"
 
 /***/ }),
 
@@ -1131,6 +1137,7 @@ var AddProductToCartComponent = (function () {
         this.ngUnsubscribe = new Subject_1.Subject();
     }
     AddProductToCartComponent.prototype.ngOnInit = function () {
+        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         this.initAddingProductToCartForm();
     };
     AddProductToCartComponent.prototype.initAddingProductToCartForm = function () {
@@ -1144,13 +1151,12 @@ var AddProductToCartComponent = (function () {
         this.loginService.loggedInUser
             .takeUntil(this.ngUnsubscribe)
             .subscribe(function (user) {
-            console.log(user);
             if (_this.isEditMode) {
                 for (var _i = 0, _a = _this.cartService.cartItems; _i < _a.length; _i++) {
                     var i = _a[_i];
                     i.name === newCartItem.name ? i.amount = newCartItem.amount : null;
                 }
-                return _this.cartService.updateCartItem(user['userId'], newCartItem);
+                return _this.cartService.updateCartItem(user['_id'], newCartItem);
             }
             return _this.cartService.addedProduct.emit(newCartItem);
         });
@@ -1210,13 +1216,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 var _1 = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+var login_service_1 = __webpack_require__("./src/app/services/login.service.ts");
 var ProductsComponent = (function () {
-    function ProductsComponent(route, router) {
+    function ProductsComponent(route, router, loginService) {
         this.route = route;
         this.router = router;
+        this.loginService = loginService;
     }
     ProductsComponent.prototype.ngOnInit = function () {
         this.toggleClick = true;
+        this.loginService.getUser();
     };
     return ProductsComponent;
 }());
@@ -1226,10 +1235,10 @@ ProductsComponent = __decorate([
         template: __webpack_require__("./src/app/products/products.component.html"),
         styles: [__webpack_require__("./src/app/products/products.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof _1.ActivatedRoute !== "undefined" && _1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof _1.Router !== "undefined" && _1.Router) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof _1.ActivatedRoute !== "undefined" && _1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof _1.Router !== "undefined" && _1.Router) === "function" && _b || Object, typeof (_c = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _c || Object])
 ], ProductsComponent);
 exports.ProductsComponent = ProductsComponent;
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=products.component.js.map
 
 /***/ }),
@@ -1309,6 +1318,14 @@ var CartService = (function () {
         this.url = 'http://localhost:4500/users/cart/';
         this.addedProduct = new core_1.EventEmitter();
     }
+    CartService.prototype.getTotalPrice = function () {
+        var _this = this;
+        this.totalPrice = 0;
+        this.cartItems.forEach(function (item) {
+            _this.totalPrice += item.price * item.amount;
+        });
+        return this.totalPrice;
+    };
     CartService.prototype.getUserCart = function (userId) {
         var _this = this;
         this.http.get(this.url + userId).toPromise().then(function (res) {
@@ -1323,6 +1340,9 @@ var CartService = (function () {
     };
     CartService.prototype.deleteItemFromCart = function (userId, item) {
         this.http.post(this.url + 'delete/' + userId, item).toPromise();
+    };
+    CartService.prototype.clearCart = function () {
+        this.http.delete(this.url + 'deleteAll').toPromise();
     };
     return CartService;
 }());
@@ -1469,7 +1489,7 @@ var LoginService = (function () {
     LoginService.prototype.postLogin = function (data) {
         var _this = this;
         this.http.post(this.url + 'login', data).toPromise().then(function (res) {
-            document.cookie = "userDetails=" + JSON.stringify(res.json());
+            _this.loggedInUser.next(res.json());
             _this.router.navigate(['../shopping-main']);
             if (res.json().cart.length > 0) {
                 _this.cartService.cartItems = res.json().cart;
@@ -1477,13 +1497,15 @@ var LoginService = (function () {
         }).catch(function (err) { return _this.errorMessage.emit('Name or Password is incorrect'); });
     };
     LoginService.prototype.logout = function () {
-        document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
         this.http.get(this.url + 'logout').toPromise().then(function (res) {
             window.location.href = res.url;
         });
     };
-    LoginService.prototype.getUser = function (id) {
-        return this.http.get(this.url + 'users/' + id).map(function (res) { return res.json(); });
+    LoginService.prototype.getUser = function () {
+        var _this = this;
+        this.http.get(this.url + 'users/user').toPromise().then(function (res) {
+            _this.loggedInUser.next(res.json()[0]);
+        });
     };
     return LoginService;
 }());

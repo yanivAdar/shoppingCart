@@ -16,6 +16,8 @@ router.post('/cart/delete/:id', usersMiddelwares.deleteCartItem, (req, res) => r
 
 router.post('/checkEmail', usersMiddelwares.checkEmail);
 
+router.delete('/cart/deleteAll', usersMiddelwares.clearCart, (req, res) => res.status(200))
+
 
 
 module.exports = router;

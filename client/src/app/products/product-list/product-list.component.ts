@@ -174,6 +174,7 @@ export class AddProductToCartComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
     this.initAddingProductToCartForm();
   }
   initAddingProductToCartForm() {
@@ -191,13 +192,11 @@ export class AddProductToCartComponent implements OnInit, OnDestroy {
     this.loginService.loggedInUser
       .takeUntil(this.ngUnsubscribe)
       .subscribe(user => {
-        console.log(user);
-
         if (this.isEditMode) {
           for (let i of this.cartService.cartItems) {
             i.name === newCartItem.name ? i.amount = newCartItem.amount : null;
           }
-          return this.cartService.updateCartItem(user['userId'], newCartItem);
+          return this.cartService.updateCartItem(user['_id'], newCartItem);
         }
         return this.cartService.addedProduct.emit(newCartItem);
       })

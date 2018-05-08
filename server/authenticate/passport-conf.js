@@ -20,6 +20,7 @@ const passportHandlers = {
   deserializeUser: (user, done) => done(null, user),
   validatedUser: (req, res, next) => {
     if (req.isAuthenticated()) {
+      
       return next();
     }
     return res.sendStatus(401);

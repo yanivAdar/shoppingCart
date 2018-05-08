@@ -23,7 +23,7 @@ export class LoginService {
     }
     postLogin(data) {
         this.http.post(this.url + 'login', data).toPromise().then(res => {
-            document.cookie = "userDetails=" + JSON.stringify(res.json());
+            this.loggedInUser.next(res.json());
             this.router.navigate(['../shopping-main']);
             if (res.json().cart.length > 0) {
                 this.cartService.cartItems = res.json().cart;
@@ -31,12 +31,13 @@ export class LoginService {
         }).catch(err => this.errorMessage.emit('Name or Password is incorrect'))
     }
     logout() {
-        document.cookie = 'userDetails=; expires=' + Date.UTC(17, 0) + "; path=/;";
         this.http.get(this.url + 'logout').toPromise().then(res => {
             window.location.href = res.url;
         })
     }
-    getUser(id) {
-        return this.http.get(this.url + 'users/' + id).map(res => res.json());
+    getUser() {
+        this.http.get(this.url + 'users/user').toPromise().then(res => {
+            this.loggedInUser.next(res.json()[0]);
+        });
     }
 }

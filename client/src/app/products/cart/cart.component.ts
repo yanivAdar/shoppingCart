@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class CartComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private cartService: CartService, private loginService: LoginService, private productListComponent: ProductListComponent) { }
-  private ngUnsubscribe = new Subject<void>();  
+  private ngUnsubscribe = new Subject<void>();
   userId;
   hoverDelete;
   totalPrice: number;
@@ -20,10 +20,11 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.hoverDelete = false;
     this.loginService.loggedInUser.subscribe(user => {
-      this.userId = user['userId'];
-      this.cartService.getUserCart(this.userId);
+      this.userId = user['_id'];
+      this.cartService.cartItems = user['cart'];
+      // this.getTotalPrice();
     })
-
+    
     this.cartService.addedProduct
     .takeUntil(this.ngUnsubscribe)
     .subscribe(item => {
@@ -38,26 +39,20 @@ export class CartComponent implements OnInit, OnDestroy {
       this.cartService.saveItemToCart(this.userId, item);
     })
   }
-
+  
   getTotalPrice() {
     this.totalPrice = 0;
     this.cartService.cartItems.forEach(item => {
       this.totalPrice += item.price * item.amount;
     })
   }
-  getCartItems() {
-    this.getTotalPrice();
-    return this.cartService.cartItems;
-  }
-
+  
   removeItemFromCart(item) {
     this.hoverDelete = false;
     this.cartService.deleteItemFromCart(this.userId, item);
     this.cartService.cartItems = this.cartService.cartItems.filter((cartItem) => {
       return cartItem.name !== item.name;
     })
-    console.log(this.cartService.cartItems);
-
   }
   editItem(item) {
     this.productListComponent.openAddItemToCart(item, true);

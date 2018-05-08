@@ -10,11 +10,11 @@ export class HeaderComponent implements OnInit {
   constructor(private loginService: LoginService) { }
   userEmail;
   ngOnInit() {
-    this.loginService.loggedInUser.subscribe(user=>{
-      this.userEmail = user['email'];
+    this.loginService.loggedInUser.subscribe(user => {
+      user ? this.userEmail = user['email'] : this.userEmail = '';
     })
   }
-  onLogout(){
+  onLogout() {
     this.loginService.logout();
   }
 }

@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
-      <li *ngFor="let item of getCartItems()" class="list-group-item listStyle">
+      <li *ngFor="let item of cartService.cartItems" class="list-group-item listStyle">
         <ul class="list-group ulPosition">
           <div class="hoverToShow" *ngIf="!hoverDelete">
             <button class="btn btn-danger btnStyle" (click)="hoverDelete = true">
@@ -48,7 +48,7 @@
 <div class="row">
   <div class="col-md-12">
     <h4 style="display: inline-flex;">
-      Total: {{totalPrice}}$
+      Total: {{cartService.getTotalPrice()}}$
     </h4>
     <button class="btn btn-primary pull-right" (click)="orderCart()">Order</button>
   </div>
