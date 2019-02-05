@@ -7,7 +7,7 @@
   <div class="contentPageStyle">
     <div class="headerPosition col-md-12">
       <div class="navigation-container">
-        <button type="button" class="btn btn-default side-btn" mat-button 
+        <button #myBtn type="button" class="btn btn-default side-btn" mat-button 
         (click)="drawer.toggle(); toggleClick = !toggleClick">
           <span [ngClass]="toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'"></span>
           Cart

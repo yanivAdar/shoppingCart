@@ -1195,7 +1195,7 @@ module.exports = ".headerPosition{\r\n    float: right;\r\n}\r\n.cartPosition{\r
 /***/ "./src/app/products/products.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\r\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\r\n    <div class=\"col-md-12\">\r\n      <app-cart></app-cart>\r\n    </div>\r\n  </mat-drawer>\r\n  <div class=\"contentPageStyle\">\r\n    <div class=\"headerPosition col-md-12\">\r\n      <div class=\"navigation-container\">\r\n        <button type=\"button\" class=\"btn btn-default side-btn\" mat-button \r\n        (click)=\"drawer.toggle(); toggleClick = !toggleClick\">\r\n          <span [ngClass]=\"toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'\"></span>\r\n          Cart\r\n        </button>\r\n        <app-categories class=\"categories\"></app-categories>\r\n      </div>\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</mat-drawer-container>"
+module.exports = "<mat-drawer-container autosize class=\"containerStyle\">\r\n  <mat-drawer #drawer class=\"cartPosition\" mode=\"side\">\r\n    <div class=\"col-md-12\">\r\n      <app-cart></app-cart>\r\n    </div>\r\n  </mat-drawer>\r\n  <div class=\"contentPageStyle\">\r\n    <div class=\"headerPosition col-md-12\">\r\n      <div class=\"navigation-container\">\r\n        <button #myBtn type=\"button\" class=\"btn btn-default side-btn\" mat-button \r\n        (click)=\"drawer.toggle(); toggleClick = !toggleClick\">\r\n          <span [ngClass]=\"toggleClick ? 'glyphicon glyphicon-menu-right' : 'glyphicon glyphicon-menu-left'\"></span>\r\n          Cart\r\n        </button>\r\n        <app-categories class=\"categories\"></app-categories>\r\n      </div>\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</mat-drawer-container>"
 
 /***/ }),
 
@@ -1226,19 +1226,24 @@ var ProductsComponent = (function () {
     ProductsComponent.prototype.ngOnInit = function () {
         this.toggleClick = true;
         this.loginService.getUser();
+        this.myBtn.nativeElement.click();
     };
     return ProductsComponent;
 }());
+__decorate([
+    core_1.ViewChild('myBtn'),
+    __metadata("design:type", typeof (_a = typeof core_1.ElementRef !== "undefined" && core_1.ElementRef) === "function" && _a || Object)
+], ProductsComponent.prototype, "myBtn", void 0);
 ProductsComponent = __decorate([
     core_1.Component({
         selector: 'app-products',
         template: __webpack_require__("./src/app/products/products.component.html"),
         styles: [__webpack_require__("./src/app/products/products.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof _1.ActivatedRoute !== "undefined" && _1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof _1.Router !== "undefined" && _1.Router) === "function" && _b || Object, typeof (_c = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof _1.ActivatedRoute !== "undefined" && _1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof _1.Router !== "undefined" && _1.Router) === "function" && _c || Object, typeof (_d = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _d || Object])
 ], ProductsComponent);
 exports.ProductsComponent = ProductsComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=products.component.js.map
 
 /***/ }),
